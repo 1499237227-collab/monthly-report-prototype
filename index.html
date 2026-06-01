@@ -282,6 +282,71 @@ body{background:#e8e4f8;font-family:-apple-system,'PingFang SC','Hiragino Sans G
 .closing{text-align:center;font-size:14px;color:#8b5060;padding:10px 16px 20px;font-weight:500}
 .closing-heart{color:#db2777}
 
+/* ══ 命运绘本 · 可展开维度卡片 ══ */
+.domain-list{padding:0 14px;display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
+.dcard{border-radius:18px;overflow:hidden;cursor:pointer;transition:transform .15s ease,box-shadow .2s ease;-webkit-tap-highlight-color:transparent}
+.dcard:active{transform:scale(.987)}
+.dcard-top{display:flex;align-items:center;gap:10px;padding:13px 14px;background:#fff}
+.dcard-ico-wrap{width:42px;height:42px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.dcard-mid{flex:1;min-width:0}
+.dcard-name{font-size:14px;font-weight:700;color:#1a1028;margin-bottom:3px}
+.dcard-badge{display:inline-flex;height:19px;padding:0 7px;border-radius:5px;font-size:10px;font-weight:700;align-items:center}
+.dcard-chev{font-size:18px;color:#c4b8e0;transition:transform .3s cubic-bezier(.4,0,.2,1);line-height:1;flex-shrink:0}
+.dcard.open .dcard-chev{transform:rotate(90deg)}
+.dcard-snippet{font-size:12px;color:#9b90b8;padding:0 14px 12px;background:#fff;line-height:1.6}
+.dcard-expand{overflow:hidden;max-height:0;transition:max-height .45s cubic-bezier(.4,0,.2,1)}
+.dcard.open .dcard-expand{max-height:360px}
+.dcard-expand-in{padding:14px 15px 16px}
+.dcard-eq{font-size:17px;font-weight:900;font-style:italic;margin-bottom:10px;line-height:1.3;letter-spacing:-.3px}
+.dcard-eb{font-size:12.5px;color:#3d2860;line-height:1.9}
+.dcard-score-badge{display:inline-flex;align-items:center;gap:4px;height:22px;padding:0 10px;border-radius:11px;font-size:10px;font-weight:700;margin-top:10px}
+
+/* ══ 命运绘本 · 章节分隔线 ══ */
+.chapter-divider{display:flex;align-items:center;justify-content:center;gap:8px;padding:14px 20px 6px;margin:0}
+.chapter-divider::before,.chapter-divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(139,92,246,.18))}
+.chapter-title{font-size:12px;font-weight:700;color:#7c3aed;letter-spacing:1px;white-space:nowrap}
+.chapter-icon{font-size:14px}
+
+/* ══ 命运绘本 · 新月/满月卡片升级 ══ */
+.moon2-row{display:flex;gap:10px;padding:0 14px;margin-bottom:12px}
+.moon2-card{flex:1;border-radius:18px;padding:15px 12px;min-width:0}
+.moon2-new{background:linear-gradient(145deg,#eef4ff,#dce8ff);border:1px solid rgba(96,165,250,.2)}
+.moon2-full{background:linear-gradient(145deg,#fff9ea,#fff0cc);border:1px solid rgba(245,158,11,.2)}
+.moon2-head{display:flex;align-items:center;gap:5px;margin-bottom:8px}
+.moon2-ico{font-size:18px}
+.moon2-title{font-size:13px;font-weight:800;color:#1a1028}
+.moon2-item{display:flex;gap:5px;margin-bottom:6px;align-items:flex-start}
+.moon2-num{width:16px;height:16px;border-radius:50%;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.moon2-num-new{background:rgba(96,165,250,.2);color:#1d4ed8}
+.moon2-num-full{background:rgba(245,158,11,.2);color:#b45309}
+.moon2-text{font-size:11px;line-height:1.65}
+.moon2-new .moon2-text{color:#2c4a80}
+.moon2-full .moon2-text{color:#7a4a10}
+
+/* ══ 命运绘本 · 流月提示升级 ══ */
+.remind2-stack{padding:0 14px;display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
+.remind2-card{border-radius:16px;padding:14px}
+.remind2-life{background:linear-gradient(135deg,#fff8f0,#ffeedd)}
+.remind2-mind{background:linear-gradient(135deg,#f2f0ff,#e8e0ff)}
+.remind2-alert{background:linear-gradient(135deg,#f0fff8,#dcfce7)}
+.remind2-hd{display:flex;align-items:center;gap:6px;margin-bottom:9px}
+.remind2-ico{font-size:18px}
+.remind2-lbl{font-size:13px;font-weight:800;color:#1a1028}
+.remind2-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px}
+.remind2-tag{height:24px;padding:0 9px;border-radius:12px;font-size:10px;font-weight:600;display:flex;align-items:center}
+.remind2-body{font-size:12px;line-height:1.75}
+.remind2-life .remind2-body{color:#7a4a10}
+.remind2-mind .remind2-body{color:#3d1a60}
+.remind2-alert .remind2-body{color:#1a5030}
+.remind2-hashtag{font-size:14px;font-weight:900;color:#7c3aed;margin-bottom:5px}
+
+/* ══ 命运绘本 · 结语 ══ */
+.closing2{margin:4px 14px 24px;background:linear-gradient(135deg,#fef0ff,#ede8ff);border-radius:20px;padding:20px 16px;text-align:center;border:1px solid rgba(139,92,246,.12);position:relative;overflow:hidden}
+.closing2::before{content:'✦ ✦ ✦';position:absolute;top:10px;left:50%;transform:translateX(-50%);font-size:9px;color:rgba(160,120,200,.35);letter-spacing:5px}
+.closing2-text{font-size:14px;font-weight:600;color:#4a1a60;line-height:1.8;margin-bottom:8px;padding-top:4px}
+.closing2-sub{font-size:11px;color:#8b70a0}
+.closing2-stars{font-size:18px;letter-spacing:3px;margin-top:6px}
+
 /* ══ CONTROLS ══ */
 .controls{margin-top:18px;display:flex;flex-direction:column;align-items:center;gap:8px}
 .ms-wrap{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.7);border-radius:20px;padding:5px 14px;box-shadow:0 2px 10px rgba(139,92,246,.10)}
@@ -681,87 +746,203 @@ body{background:#e8e4f8;font-family:-apple-system,'PingFang SC','Hiragino Sans G
         </div>
       </div>
 
-      <!-- Domain focus -->
-      <div class="sec-hd" style="padding-top:4px">
-        <span class="sec-t">本月重点关注领域</span>
-      </div>
-      <div class="domain-hd" id="domHd">→ 本月重点关注领域 ←</div>
-
-      <div class="domain-grid" id="domainGrid">
-        <div class="domain-card">
-          <div class="domain-card-ico">💰</div>
-          <div class="domain-card-title">财富</div>
-          <div class="domain-card-tag" style="background:rgba(245,158,11,.12);color:#b45309">事情没那么糟</div>
-          <div class="domain-card-body">财务紧张感减轻，更懂得规划与储蓄，稳中向好。</div>
-        </div>
-        <div class="domain-card">
-          <div class="domain-card-ico">💕</div>
-          <div class="domain-card-title">感情</div>
-          <div class="domain-card-tag" style="background:rgba(244,114,182,.12);color:#be185d">亲密的边界</div>
-          <div class="domain-card-body">关系更趋稳定，在亲密中学会设边界，彼此更舒适。</div>
-        </div>
-        <div class="domain-card">
-          <div class="domain-card-ico">⭐</div>
-          <div class="domain-card-title">事业</div>
-          <div class="domain-card-tag" style="background:rgba(139,92,246,.12);color:#6d28d9">做对的事不累</div>
-          <div class="domain-card-body">方向逐渐清晰，效率提升，踏实前行有回报。</div>
-        </div>
-        <div class="domain-card">
-          <div class="domain-card-ico">📚</div>
-          <div class="domain-card-title">沟通与<br>学习状态</div>
-          <div class="domain-card-tag" style="background:rgba(96,165,250,.12);color:#1d4ed8">心力清耗</div>
-          <div class="domain-card-body">任务繁多易分心，学会专注与取舍，提升效率。</div>
-        </div>
-        <div class="domain-card">
-          <div class="domain-card-ico">🌿</div>
-          <div class="domain-card-title">心理与<br>自我</div>
-          <div class="domain-card-tag" style="background:rgba(52,211,153,.12);color:#065f46">安放自我</div>
-          <div class="domain-card-body">给自己更多理解与休息，内心更安稳。</div>
-        </div>
+      <!-- Part2 Domain focus -->
+      <div class="chapter-divider">
+        <span class="chapter-icon">✦</span>
+        <span class="chapter-title">本月重点关注领域</span>
+        <span class="chapter-icon">✦</span>
       </div>
 
-      <!-- Moon cards -->
-      <div class="moon-hd">→ 新月许愿 &amp; 满月释怀 ←</div>
-      <div class="moon-row-cards" id="moonCards">
-        <div class="moon-card-new">
-          <div class="moon-card-ico">🌙✨</div>
-          <div class="moon-card-title">新月许愿</div>
-          <div class="moon-dots">
-            <div class="moon-dot">为自己的未来播下希望</div>
-            <div class="moon-dot">新关系、新机会、新开始</div>
+      <div class="domain-list" id="domainGrid">
+
+        <!-- 财富 -->
+        <div class="dcard" style="box-shadow:0 2px 14px rgba(245,158,11,.10)" onclick="toggleDomain(this)">
+          <div class="dcard-top">
+            <div class="dcard-ico-wrap" style="background:rgba(245,158,11,.10)">💰</div>
+            <div class="dcard-mid">
+              <div class="dcard-name">财富</div>
+              <span class="dcard-badge" style="background:rgba(245,158,11,.12);color:#b45309">事情没那么糟</span>
+            </div>
+            <span class="dcard-chev">›</span>
+          </div>
+          <div class="dcard-snippet">这段时间你对金钱和资源的安排容易变得紧绷…</div>
+          <div class="dcard-expand">
+            <div class="dcard-expand-in" style="background:linear-gradient(160deg,#fffdf5,#fff8e8);border-top:1px solid rgba(245,158,11,.10)">
+              <div class="dcard-eq" style="color:#b45309">"事情没那么糟"</div>
+              <div class="dcard-eb">这段时间你对金钱和资源的安排容易变得紧绷。一点小的波动就可能让你开始怀疑自己的判断，比如「我是不是做错了选择」。你会倾向于把事情想得过于严重，其实回头看看，那些让你焦虑的事大多没有想象中那么糟。</div>
+              <span class="dcard-score-badge" style="background:rgba(245,158,11,.15);color:#b45309">财务 · 68分</span>
+            </div>
           </div>
         </div>
-        <div class="moon-card-full">
-          <div class="moon-card-ico">🏮</div>
-          <div class="moon-card-title">满月释怀</div>
-          <div class="moon-dots">
-            <div class="moon-dot">放下不再适合的关系</div>
-            <div class="moon-dot">放下焦虑与无力感</div>
+
+        <!-- 感情 -->
+        <div class="dcard" style="box-shadow:0 2px 14px rgba(244,114,182,.10)" onclick="toggleDomain(this)">
+          <div class="dcard-top">
+            <div class="dcard-ico-wrap" style="background:rgba(244,114,182,.10)">💕</div>
+            <div class="dcard-mid">
+              <div class="dcard-name">感情</div>
+              <span class="dcard-badge" style="background:rgba(244,114,182,.12);color:#be185d">亲密的边界</span>
+            </div>
+            <span class="dcard-chev">›</span>
+          </div>
+          <div class="dcard-snippet">本月你开始更清晰地意识到「我是谁」与「我们是谁」之间的区别…</div>
+          <div class="dcard-expand">
+            <div class="dcard-expand-in" style="background:linear-gradient(160deg,#fff5fa,#fde8f3);border-top:1px solid rgba(244,114,182,.10)">
+              <div class="dcard-eq" style="color:#be185d">"亲密的边界"</div>
+              <div class="dcard-eb">本月你开始更清晰地意识到「我是谁」与「我们是谁」之间的区别。你不会轻易在关系中丢失自己，反而会带着一种温和的清醒去体验亲密。你既愿意靠近，也愿意保留属于自己的空间。</div>
+              <span class="dcard-score-badge" style="background:rgba(244,114,182,.15);color:#be185d">情感 · 88分</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 事业 -->
+        <div class="dcard" style="box-shadow:0 2px 14px rgba(139,92,246,.10)" onclick="toggleDomain(this)">
+          <div class="dcard-top">
+            <div class="dcard-ico-wrap" style="background:rgba(139,92,246,.10)">⭐</div>
+            <div class="dcard-mid">
+              <div class="dcard-name">事业</div>
+              <span class="dcard-badge" style="background:rgba(139,92,246,.12);color:#6d28d9">做对的事不累</span>
+            </div>
+            <span class="dcard-chev">›</span>
+          </div>
+          <div class="dcard-snippet">这段时间你在工作中会找到一种「对的感觉」…</div>
+          <div class="dcard-expand">
+            <div class="dcard-expand-in" style="background:linear-gradient(160deg,#f8f5ff,#f0eaff);border-top:1px solid rgba(139,92,246,.10)">
+              <div class="dcard-eq" style="color:#6d28d9">"做对的事不累"</div>
+              <div class="dcard-eb">这段时间你在工作中会找到一种「对的感觉」。不是突然升职加薪，也不是完成了什么大项目，而是你做的每件事都觉得刚刚好——不勉强、不硬撑、不憋屈。你开始相信，原来工作也可以不用那么累，只要你在做对的事。</div>
+              <span class="dcard-score-badge" style="background:rgba(139,92,246,.15);color:#6d28d9">事业 · 78分</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 沟通与学习 -->
+        <div class="dcard" style="box-shadow:0 2px 14px rgba(96,165,250,.10)" onclick="toggleDomain(this)">
+          <div class="dcard-top">
+            <div class="dcard-ico-wrap" style="background:rgba(96,165,250,.10)">📚</div>
+            <div class="dcard-mid">
+              <div class="dcard-name">沟通与学习状态</div>
+              <span class="dcard-badge" style="background:rgba(96,165,250,.12);color:#1d4ed8">心力消耗</span>
+            </div>
+            <span class="dcard-chev">›</span>
+          </div>
+          <div class="dcard-snippet">被迫的无效交流、冗杂的学习任务与仓促出行…</div>
+          <div class="dcard-expand">
+            <div class="dcard-expand-in" style="background:linear-gradient(160deg,#f0f6ff,#e6efff);border-top:1px solid rgba(96,165,250,.10)">
+              <div class="dcard-eq" style="color:#1d4ed8">"心力消耗"</div>
+              <div class="dcard-eb">被迫的无效交流、冗杂的学习任务与仓促出行，会慢慢消耗你的内在心力，本能抵触向外联结，内心生出疏离感，不愿袒露真实想法，陷入封闭的情绪内耗。</div>
+              <span class="dcard-score-badge" style="background:rgba(96,165,250,.15);color:#1d4ed8">学业 · 98分</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 心理与自我 -->
+        <div class="dcard" style="box-shadow:0 2px 14px rgba(52,211,153,.10)" onclick="toggleDomain(this)">
+          <div class="dcard-top">
+            <div class="dcard-ico-wrap" style="background:rgba(52,211,153,.10)">🌿</div>
+            <div class="dcard-mid">
+              <div class="dcard-name">心理与自我</div>
+              <span class="dcard-badge" style="background:rgba(52,211,153,.12);color:#065f46">安放自我</span>
+            </div>
+            <span class="dcard-chev">›</span>
+          </div>
+          <div class="dcard-snippet">这段时间你会更在意「家」的感觉…</div>
+          <div class="dcard-expand">
+            <div class="dcard-expand-in" style="background:linear-gradient(160deg,#f0fdf7,#e0f8ed);border-top:1px solid rgba(52,211,153,.10)">
+              <div class="dcard-eq" style="color:#065f46">"安放自我"</div>
+              <div class="dcard-eb">这段时间你会更在意「家」的感觉。可能是想把房间收拾得更舒服，可能是想多陪陪家人，也可能只是想在熟悉的环境里待着。对外面的热闹慢慢失去了兴趣，对内心的安静越来越珍惜。这不是封闭，是你开始学会在自己的空间里安放自己。</div>
+              <span class="dcard-score-badge" style="background:rgba(52,211,153,.15);color:#065f46">心理 · 66分</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Part3 Moon cards -->
+      <div class="chapter-divider">
+        <span class="chapter-icon">🌙</span>
+        <span class="chapter-title">许愿 &amp; 清理</span>
+        <span class="chapter-icon">🏮</span>
+      </div>
+      <div class="moon2-row" id="moonCards">
+        <div class="moon2-card moon2-new">
+          <div class="moon2-head">
+            <span class="moon2-ico">🌙</span>
+            <span class="moon2-title">新月许愿</span>
+          </div>
+          <div class="moon2-item">
+            <span class="moon2-num moon2-num-new">1</span>
+            <span class="moon2-text">许愿我能尝试一件从没做过的事，比如脱口秀开放麦。</span>
+          </div>
+          <div class="moon2-item">
+            <span class="moon2-num moon2-num-new">2</span>
+            <span class="moon2-text">许愿我最近的人缘、爱情都速速开花，甜甜蜜蜜，双向奔赴。</span>
+          </div>
+        </div>
+        <div class="moon2-card moon2-full">
+          <div class="moon2-head">
+            <span class="moon2-ico">🌕</span>
+            <span class="moon2-title">满月释怀</span>
+          </div>
+          <div class="moon2-item">
+            <span class="moon2-num moon2-num-full">1</span>
+            <span class="moon2-text">每当感到不适时，提醒自己深呼吸三次，放松全身肌肉。</span>
+          </div>
+          <div class="moon2-item">
+            <span class="moon2-num moon2-num-full">2</span>
+            <span class="moon2-text">睡前给自己按一按眉骨和太阳穴，让眉头舒展开。</span>
           </div>
         </div>
       </div>
 
-      <!-- Reminders -->
-      <div class="reminder-hd">流月提示</div>
-      <div class="reminder-grid" id="reminderGrid">
-        <div class="reminder-card">
-          <div class="reminder-card-ico">🍵</div>
-          <div class="reminder-card-lbl">生活重点</div>
-          <div class="reminder-card-text">照顾好自己，身心安稳，好运才会靠近。</div>
+      <!-- Part4 流月提示 -->
+      <div class="chapter-divider">
+        <span class="chapter-icon">🌊</span>
+        <span class="chapter-title">流月提示</span>
+        <span class="chapter-icon">🌊</span>
+      </div>
+      <div class="remind2-stack" id="reminderGrid">
+
+        <div class="remind2-card remind2-life">
+          <div class="remind2-hd">
+            <span class="remind2-ico">🍵</span>
+            <span class="remind2-lbl">生活重点</span>
+          </div>
+          <div class="remind2-tags">
+            <span class="remind2-tag" style="background:rgba(251,191,36,.15);color:#b45309">🧳 旅行</span>
+            <span class="remind2-tag" style="background:rgba(52,211,153,.15);color:#065f46">🥾 徒步</span>
+            <span class="remind2-tag" style="background:rgba(251,113,133,.15);color:#be185d">🍜 打卡美食</span>
+            <span class="remind2-tag" style="background:rgba(96,165,250,.15);color:#1d4ed8">📖 学习培训</span>
+            <span class="remind2-tag" style="background:rgba(167,139,250,.15);color:#6d28d9">🎨 沉浸爱好</span>
+            <span class="remind2-tag" style="background:rgba(251,191,36,.15);color:#b45309">💬 聚会唠嗑</span>
+            <span class="remind2-tag" style="background:rgba(244,114,182,.15);color:#be185d">🎭 看演出</span>
+          </div>
+          <div class="remind2-body">胃口变好、聚餐多，体重容易上涨，心态明显放松，整体偏佛系状态。</div>
         </div>
-        <div class="reminder-card">
-          <div class="reminder-card-ico">🪟</div>
-          <div class="reminder-card-lbl">内心状态</div>
-          <div class="reminder-card-text">#洞察世事<br>看清趋势，不盲目跟风，保持清醒与独立。</div>
+
+        <div class="remind2-card remind2-mind">
+          <div class="remind2-hd">
+            <span class="remind2-ico">🔮</span>
+            <span class="remind2-lbl">内心状态</span>
+          </div>
+          <div class="remind2-hashtag">#洞察世事</div>
+          <div class="remind2-body">直觉灵敏、洞察力超强的时期。会钻牛角尖，看问题的角度很刁钻。</div>
         </div>
-        <div class="reminder-card">
-          <div class="reminder-card-ico">🌸</div>
-          <div class="reminder-card-lbl">重点提醒</div>
-          <div class="reminder-card-text">拒绝清耗与烂桃花，把精力放在值得的人与事上。</div>
+
+        <div class="remind2-card remind2-alert">
+          <div class="remind2-hd">
+            <span class="remind2-ico">⚡</span>
+            <span class="remind2-lbl">重点提醒</span>
+          </div>
+          <div class="remind2-body">情绪起伏大，内心摇摆，睡前不宜复盘琢磨事。本月对各项事物的进度要放宽心——不着急。</div>
         </div>
+
       </div>
 
-      <div class="closing" id="closing">这个月，请把温柔留给自己。<span class="closing-heart">❤</span></div>
+      <div class="closing2" id="closing">
+        <div class="closing2-text">这个月，请把温柔留给自己。<br>你值得被好好对待。</div>
+        <div class="closing2-sub">2026年5月 · 为你专属生成</div>
+        <div class="closing2-stars">🌙 ✦ 🌸</div>
+      </div>
     </div>
 
   </div><!-- /scroller -->
@@ -856,6 +1037,11 @@ function applyState() {
     p4Sections.forEach(id=>{ const el=document.getElementById(id); if(el){el.style.filter='';el.style.pointerEvents='';} });
     if(overlay) overlay.style.display='none';
   }
+}
+
+// ── Toggle domain card expand ──
+function toggleDomain(el) {
+  el.classList.toggle('open');
 }
 
 // ── Click handlers ──
