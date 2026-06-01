@@ -2,226 +2,315 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>月度报告优化 · 交互原型 · PRD V1.0</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>月度报告优化 · 原型 V2</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{background:#07051a;font-family:-apple-system,'PingFang SC','Hiragino Sans GB',sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:24px 0 60px}
-.proto-label{font-size:11px;letter-spacing:2px;color:rgba(255,255,255,0.2);margin-bottom:16px;text-transform:uppercase}
+body{background:#e8e4f8;font-family:-apple-system,'PingFang SC','Hiragino Sans GB',sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:20px 0 60px;-webkit-font-smoothing:antialiased}
+.proto-label{font-size:11px;letter-spacing:2px;color:rgba(100,80,150,.4);margin-bottom:14px;text-transform:uppercase}
 
-/* ── PHONE FRAME ── */
-.phone{width:375px;height:812px;background:linear-gradient(180deg,#1c0f3a 0%,#0f0820 100%);border-radius:44px;overflow:hidden;position:relative;box-shadow:0 30px 80px rgba(0,0,0,.85),0 0 0 1.5px rgba(255,255,255,.1),inset 0 0 0 1px rgba(255,255,255,.04)}
+/* ── PHONE ── */
+.phone{width:375px;height:812px;background:#f0ecff;border-radius:44px;overflow:hidden;position:relative;box-shadow:0 24px 64px rgba(100,60,200,.22),0 0 0 1px rgba(200,180,255,.5)}
 
 /* ── STATUS BAR ── */
-.sbar{height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-size:12px;font-weight:600;color:rgba(255,255,255,.85);flex-shrink:0}
+.sbar{height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;font-size:12px;font-weight:600;color:#1a1028;flex-shrink:0;background:#f0ecff}
 
 /* ── PAGE NAV ── */
-.pnav{display:flex;height:44px;background:rgba(0,0,0,.35);backdrop-filter:blur(12px);padding:4px 6px;gap:2px;flex-shrink:0}
-.pnav-btn{flex:1;height:100%;border:none;background:transparent;color:rgba(255,255,255,.42);font-size:10.5px;cursor:pointer;border-radius:8px;transition:all .2s;font-family:inherit;white-space:nowrap}
-.pnav-btn.on{background:rgba(255,255,255,.13);color:#fff;font-weight:700}
+.pnav{display:flex;height:40px;background:#f0ecff;border-bottom:1px solid rgba(139,92,246,.08);padding:0 8px;gap:2px;flex-shrink:0}
+.pnav-btn{flex:1;height:100%;border:none;background:transparent;color:rgba(80,60,120,.45);font-size:10px;cursor:pointer;border-radius:8px;transition:all .2s;font-family:inherit;white-space:nowrap;font-weight:500}
+.pnav-btn.on{background:rgba(139,92,246,.10);color:#7c3aed;font-weight:700}
 
-/* ── SCROLL CONTENT ── */
-.content{height:calc(812px - 44px - 44px - 56px);overflow-y:auto;overflow-x:hidden}
-.content::-webkit-scrollbar{display:none}
-
-/* ── TAB BAR ── */
-.tbar{height:56px;background:rgba(12,6,28,.96);border-top:1px solid rgba(255,255,255,.07);display:flex;align-items:center;justify-content:space-around;flex-shrink:0;padding-bottom:2px}
-.tab{display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:4px 8px}
-.tab-ico{font-size:20px}
-.tab-lbl{font-size:10px;color:rgba(255,255,255,.35)}
-.tab.on .tab-lbl{color:#b794f4}
+/* ── SCROLL ── */
+.scr{height:calc(812px - 44px - 40px);overflow-y:auto;overflow-x:hidden;background:#f0ecff}
+.scr::-webkit-scrollbar{display:none}
 
 /* ── PAGES ── */
 .page{display:none}.page.on{display:block}
 
-/* ── COMMON ── */
-.sec-hd{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 8px}
-.sec-title{font-size:15px;font-weight:700;color:#fff}
-.sec-more{font-size:12px;color:rgba(255,255,255,.35)}
-.card{background:rgba(255,255,255,.055);border-radius:16px;margin:0 16px 10px;overflow:hidden}
-.card-body{padding:14px 16px}
-.spacer{height:16px}
-.tag{display:inline-flex;align-items:center;height:20px;padding:0 7px;border-radius:4px;font-size:10px;font-weight:500}
-.tag-v{background:rgba(138,79,255,.22);color:#c9a4ff}
-.tag-g{background:rgba(245,200,66,.18);color:#f5c842}
-.tag-t{background:rgba(78,205,196,.2);color:#4ecdc4}
-.tag-b{background:rgba(94,179,240,.2);color:#5eb3f0}
-.skeleton{height:11px;background:linear-gradient(90deg,rgba(255,255,255,.04) 0%,rgba(255,255,255,.08) 50%,rgba(255,255,255,.04) 100%);border-radius:5px;margin-bottom:7px}
-.btn-purple{display:block;width:100%;height:48px;border:none;border-radius:24px;background:linear-gradient(135deg,#7b35c8,#4a1d96);color:#fff;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit}
-.btn-gold{display:block;width:100%;height:48px;border:none;border-radius:24px;background:linear-gradient(135deg,#f5c842,#e8930a);color:#1a0800;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit}
+/* ══ COMMON ══ */
+.white-card{background:#fff;border-radius:18px;margin:0 14px 10px;box-shadow:0 2px 12px rgba(100,60,200,.06)}
+.card-pad{padding:14px}
+.sec-hd{display:flex;align-items:center;justify-content:space-between;padding:12px 16px 6px}
+.sec-t{font-size:15px;font-weight:700;color:#1a1028}
+.sec-sub{font-size:12px;color:#8b80a8;display:flex;align-items:center;gap:4px}
+.chip{display:inline-flex;align-items:center;height:20px;padding:0 8px;border-radius:10px;font-size:10px;font-weight:600}
+.chip-v{background:rgba(139,92,246,.12);color:#7c3aed}
+.chip-p{background:rgba(236,72,153,.10);color:#db2777}
+.chip-o{background:rgba(249,115,22,.10);color:#ea580c}
+.chip-b{background:rgba(96,165,250,.12);color:#2563eb}
+.chip-g{background:rgba(52,211,153,.12);color:#059669}
+.tag{display:inline-flex;align-items:center;height:18px;padding:0 7px;border-radius:4px;font-size:10px;font-weight:500}
+.spacer{height:20px}
 
-/* ════════════════ PAGE 1 ════════════════ */
-.mood-hero{padding:20px 16px 12px;display:flex;flex-direction:column;align-items:center;background:linear-gradient(180deg,rgba(80,30,140,.5) 0%,transparent 100%)}
-.mood-mo{font-size:12px;color:rgba(255,255,255,.45);margin-bottom:8px}
-.mood-ring{width:76px;height:76px;border-radius:50%;border:2.5px solid #9b6fd3;display:flex;flex-direction:column;align-items:center;justify-content:center;margin-bottom:8px}
-.mood-ring-n{font-size:24px;font-weight:800;color:#fff;line-height:1}
-.mood-ring-l{font-size:10px;color:rgba(255,255,255,.45)}
-.mood-kws{display:flex;gap:5px}
+/* ══════ PAGE 1: 每日心情-月 ══════ */
+/* Top nav */
+.top-nav{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:#f0ecff}
+.nav-back{font-size:20px;color:#4a3080;cursor:pointer}
+.nav-title{font-size:17px;font-weight:700;color:#1a1028;display:flex;align-items:center;gap:6px}
+.nav-icons{display:flex;gap:14px;color:#4a3080;font-size:18px}
 
-/* Entry card */
-.entry-card{background:linear-gradient(135deg,rgba(100,45,185,.38),rgba(45,15,90,.38));border:1px solid rgba(155,111,211,.3);border-radius:16px;margin:0 16px 10px;padding:14px 14px 12px}
+/* Time tabs */
+.time-tabs{display:flex;align-items:center;padding:0 16px;gap:2px;border-bottom:1px solid rgba(139,92,246,.08)}
+.time-tab{flex:1;height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#8b80a8;cursor:pointer;position:relative}
+.time-tab.on{color:#7c3aed;font-weight:700}
+.time-tab.on::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:20px;height:2.5px;background:#7c3aed;border-radius:2px}
+.view-chart{font-size:12px;color:#7c3aed;white-space:nowrap;display:flex;align-items:center;gap:2px}
+
+/* Month scroll */
+.month-scroll-wrap{padding:8px 0;background:#f0ecff}
+.month-scroll{display:flex;gap:0;overflow-x:auto;padding:0 14px;scrollbar-width:none}
+.month-scroll::-webkit-scrollbar{display:none}
+.month-item{flex-shrink:0;height:30px;padding:0 12px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#8b80a8;cursor:pointer;border-radius:15px;white-space:nowrap}
+.month-item.on{background:rgba(139,92,246,.12);color:#7c3aed;font-weight:700}
+
+/* Score section */
+.score-section{padding:14px 16px 10px;background:#f0ecff}
+.score-main-lbl{font-size:13px;color:#8b80a8;font-weight:500;margin-bottom:4px}
+.score-main-num{font-size:36px;font-weight:900;color:#2563eb;display:inline;line-height:1}
+.score-main-unit{font-size:14px;font-weight:600;color:#2563eb;margin-left:1px}
+.dim-row{display:flex;gap:14px;margin-top:10px;overflow-x:auto;padding-bottom:2px}
+.dim-row::-webkit-scrollbar{display:none}
+.dim-item{display:flex;flex-direction:column;align-items:center;gap:4px;flex-shrink:0}
+.dim-bar-wrap{width:4px;height:38px;background:rgba(0,0,0,.06);border-radius:2px;overflow:hidden;position:relative}
+.dim-bar-fill{position:absolute;bottom:0;width:100%;border-radius:2px;transition:height .4s ease}
+.dim-num{font-size:14px;font-weight:700;color:#1a1028}
+.dim-lbl{font-size:10px;color:#8b80a8}
+
+/* Banner card */
+.banner-card{margin:0 14px 8px;background:linear-gradient(135deg,#fef3ff,#f0e8ff);border-radius:16px;padding:12px 14px;display:flex;align-items:center;gap:10px;border:1px solid rgba(139,92,246,.08)}
+.banner-ico{font-size:28px;flex-shrink:0}
+.banner-info{flex:1}
+.banner-title{font-size:13px;font-weight:700;color:#4a3080}
+.banner-sub{font-size:11px;color:#8b80a8;margin-top:1px}
+.banner-btn{height:26px;padding:0 12px;border:none;border-radius:13px;background:rgba(139,92,246,.15);color:#7c3aed;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:inherit}
+
+/* Expert row */
+.expert-row{margin:0 14px 8px;background:#fff;border-radius:14px;padding:11px 14px;display:flex;align-items:center;gap:10px}
+.expert-ico{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#a78bfa,#7c3aed);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.expert-t{font-size:13px;font-weight:600;color:#1a1028;flex:1}
+.expert-badge{font-size:12px;color:#7c3aed;display:flex;align-items:center;gap:3px;white-space:nowrap}
+
+/* Psychology section */
+.psych-hd{display:flex;align-items:center;justify-content:space-between;padding:10px 16px 6px}
+.psych-title{font-size:15px;font-weight:700;color:#1a1028}
+.psych-right{display:flex;align-items:center;gap:4px;font-size:12px;color:#8b80a8}
+
+/* Entry card - KEY COMPONENT */
+.entry-card{margin:0 14px 10px;background:#fff;border-radius:18px;padding:14px;border:1.5px solid rgba(139,92,246,.18);box-shadow:0 2px 16px rgba(139,92,246,.08)}
 .entry-head{display:flex;align-items:center;gap:8px;margin-bottom:10px}
-.entry-ico{font-size:18px}
-.entry-ttl{font-size:13px;color:rgba(255,255,255,.65)}
-.entry-ttl strong{color:#fff;font-size:14px}
-.dtags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
-.dtag{display:inline-flex;align-items:center;gap:4px;height:27px;padding:0 10px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.17);border-radius:14px;font-size:12px;color:#fff}
-.entry-foot{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.entry-hint{font-size:12px;color:rgba(255,255,255,.45);flex:1}
-.entry-btn{height:30px;border:none;border-radius:15px;padding:0 14px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:inherit}
-.entry-btn.mbr{background:linear-gradient(135deg,#9b6fd3,#6b35a3);color:#fff}
-.entry-btn.non{background:linear-gradient(135deg,#f5c842,#e8930a);color:#1a0800}
+.entry-star{font-size:16px;color:#f59e0b}
+.entry-title-main{font-size:14px;font-weight:700;color:#1a1028}
+.entry-tags{display:flex;gap:5px;flex-wrap:wrap;margin-left:auto}
+.entry-body{font-size:13px;color:#4a3080;line-height:1.65;margin-bottom:12px}
+.entry-footer{display:flex;align-items:center;justify-content:space-between}
+.entry-lock{color:#c4b8e0;font-size:15px}
+.entry-cta-mbr{display:flex;align-items:center;gap:3px;font-size:13px;font-weight:700;color:#7c3aed;cursor:pointer}
+.entry-cta-non{display:flex;align-items:center;gap:3px;font-size:13px;font-weight:700;color:#db2777;cursor:pointer}
 
-/* ════════════════ PAGE 2 ════════════════ */
-.svip-bar{margin:12px 16px 4px;height:70px;background:linear-gradient(135deg,#2d1b69,#160838);border:1px solid rgba(155,111,211,.35);border-radius:16px;display:flex;align-items:center;padding:0 14px;gap:12px}
-.svip-cr{font-size:26px}
-.svip-info{flex:1}
-.svip-name{font-size:14px;font-weight:700;color:#fff}
-.svip-desc{font-size:11px;color:rgba(255,255,255,.42);margin-top:2px}
-.svip-btn{height:27px;padding:0 13px;border:none;border-radius:14px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;background:linear-gradient(135deg,#f5c842,#e8930a);color:#1a0800}
-.svip-btn.done{background:rgba(255,255,255,.15);color:rgba(255,255,255,.7)}
+/* Mood article card */
+.mood-article{margin:0 14px 10px;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 2px 12px rgba(100,60,200,.06)}
+.mood-article-img{height:100px;background:linear-gradient(135deg,#ffe4f0,#e8d5ff,#d5eaff);display:flex;align-items:center;justify-content:center;font-size:40px;position:relative}
+.mood-article-body{padding:12px 14px}
+.mood-article-title{font-size:14px;font-weight:700;color:#1a1028;margin-bottom:4px}
+.mood-article-text{font-size:12px;color:#8b80a8;line-height:1.6}
+.mood-article-expand{font-size:12px;color:#7c3aed;font-weight:600}
 
-/* Rights bar */
-.rbar{margin:0 16px 10px;background:linear-gradient(135deg,rgba(90,40,170,.22),rgba(40,15,90,.22));border:1px solid rgba(155,111,211,.22);border-radius:12px;padding:11px 13px;display:flex;align-items:center;gap:10px}
-.rbar-ico{font-size:22px}
-.rbar-info{flex:1}
-.rbar-title{font-size:14px;font-weight:700;color:#fff;display:flex;align-items:center;gap:5px}
-.rbar-sub{display:flex;gap:4px;margin-top:4px;align-items:center}
-.rbar-btn{height:29px;padding:0 13px;border:none;border-radius:15px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:inherit}
-.rbar-btn.mbr{background:rgba(155,111,211,.28);border:1px solid rgba(155,111,211,.45);color:#c9a4ff}
-.rbar-btn.non{background:linear-gradient(135deg,#f5c842,#e8930a);color:#1a0800}
+/* ══════ PAGE 2: 报告列表 ══════ */
+.rpt-top-nav{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:#f0ecff}
+.rpt-nav-title{font-size:17px;font-weight:700;color:#1a1028}
+.rpt-nav-icons{display:flex;gap:16px;color:#4a3080;font-size:18px}
 
-/* Report card */
-.rpt-card{margin:0 16px 8px;background:rgba(255,255,255,.048);border-radius:13px;padding:13px;display:flex;align-items:center;gap:11px}
-.rpt-img{width:52px;height:52px;border-radius:10px;background:linear-gradient(135deg,#3b1f6b,#1d0d40);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
-.rpt-inf{flex:1}
-.rpt-n{font-size:14px;font-weight:600;color:#fff}
-.rpt-d{font-size:11px;color:rgba(255,255,255,.4);margin-top:3px}
-.rpt-price{font-size:13px;color:#f5c842;font-weight:700}
+/* Category tabs */
+.cat-tabs{display:flex;padding:4px 14px;gap:2px;overflow-x:auto;scrollbar-width:none}
+.cat-tabs::-webkit-scrollbar{display:none}
+.cat-tab{flex-shrink:0;height:30px;padding:0 14px;border-radius:15px;font-size:13px;color:#8b80a8;cursor:pointer;display:flex;align-items:center;font-family:inherit;border:none;background:transparent;font-weight:500}
+.cat-tab.on{background:rgba(139,92,246,.12);color:#7c3aed;font-weight:700}
 
-/* ════════════════ PAGE 3 ════════════════ */
-.unlock-hero{padding:18px 16px 10px;text-align:center}
-.unlock-title{font-size:19px;font-weight:800;color:#fff;margin-bottom:3px}
-.unlock-sub{font-size:13px;color:rgba(255,255,255,.42);margin-bottom:16px}
-.radar-wrap{position:relative;display:inline-block}
-.radar-badge{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none}
-.radar-score{font-size:26px;font-weight:800;color:#fff;line-height:1}
-.radar-lbl{font-size:11px;color:rgba(255,255,255,.45)}
+/* SVIP bar */
+.svip-bar{margin:8px 14px;background:linear-gradient(135deg,#ede9fe,#ddd6fe);border-radius:14px;padding:11px 14px;display:flex;align-items:center;gap:10px}
+.svip-crown{font-size:16px}
+.svip-text{flex:1;font-size:13px;color:#4a3080;font-weight:600}
+.svip-arrow{color:#7c3aed;font-size:16px}
 
-/* Preview domains */
-.prev-sec{padding:0 16px 10px}
-.prev-lbl{font-size:12px;color:rgba(255,255,255,.42);margin-bottom:9px;display:flex;align-items:center;gap:5px}
-.prev-grid{display:flex;gap:8px}
-.prev-card{flex:1;background:rgba(155,111,211,.13);border:1px solid rgba(155,111,211,.22);border-radius:12px;padding:10px 6px;text-align:center}
-.prev-ico{font-size:18px;margin-bottom:4px}
-.prev-name{font-size:11px;color:rgba(255,255,255,.75);font-weight:500;margin-bottom:2px}
-.prev-score{font-size:19px;font-weight:800;color:#c9a4ff}
+/* Monthly report card (special wide card) */
+.monthly-rpt-card{margin:0 14px 10px;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 2px 16px rgba(139,92,246,.10);border:1.5px solid rgba(139,92,246,.14)}
+.monthly-rpt-top{display:flex;align-items:center;gap:12px;padding:14px}
+.monthly-rpt-illo{width:64px;height:64px;border-radius:14px;background:linear-gradient(135deg,#ede9fe,#c4b5fd);display:flex;align-items:center;justify-content:center;font-size:30px;flex-shrink:0}
+.monthly-rpt-info{flex:1}
+.monthly-rpt-title{font-size:15px;font-weight:800;color:#1a1028;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.monthly-rpt-desc{font-size:12px;color:#8b80a8;margin-top:3px;line-height:1.5}
+.monthly-rpt-btn-mbr{height:32px;padding:0 16px;border:none;border-radius:16px;background:rgba(139,92,246,.12);color:#7c3aed;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:inherit;display:flex;align-items:center;gap:4px}
+.monthly-rpt-btn-non{height:32px;padding:0 16px;border:none;border-radius:16px;background:linear-gradient(135deg,#fb7185,#ec4899);color:#fff;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:inherit;display:flex;align-items:center;gap:4px}
 
-/* Locked modules */
-.locked-list{padding:0 16px;margin-bottom:4px}
-.locked-lbl{font-size:12px;color:rgba(255,255,255,.35);margin-bottom:9px}
-.lck-row{background:rgba(255,255,255,.04);border-radius:12px;padding:13px 14px;margin-bottom:7px;display:flex;align-items:center;gap:11px;position:relative;overflow:hidden}
-.lck-row::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.28);backdrop-filter:blur(2px)}
-.lck-ico{font-size:20px;position:relative;z-index:1}
-.lck-inf{flex:1;position:relative;z-index:1}
-.lck-n{font-size:14px;font-weight:600;color:#fff}
-.lck-d{font-size:11px;color:rgba(255,255,255,.38);margin-top:2px}
-.lck-lock{font-size:15px;position:relative;z-index:2}
+/* Regular report card */
+.rpt-card{margin:0 14px 8px;background:#fff;border-radius:16px;padding:12px;display:flex;gap:11px;box-shadow:0 1px 8px rgba(100,60,200,.05)}
+.rpt-thumb{width:72px;height:72px;border-radius:12px;flex-shrink:0;object-fit:cover;background:linear-gradient(135deg,#ffe4f0,#c4b5fd);display:flex;align-items:center;justify-content:center;font-size:32px}
+.rpt-info{flex:1}
+.rpt-name{font-size:14px;font-weight:700;color:#1a1028}
+.rpt-desc{font-size:12px;color:#8b80a8;margin-top:2px;line-height:1.4}
+.rpt-unlock{font-size:11px;color:#c4b8e0;margin-top:4px}
+.rpt-foot{display:flex;align-items:center;justify-content:space-between;margin-top:8px}
+.rpt-price{display:flex;align-items:center;gap:8px}
+.rpt-vip{font-size:12px;font-weight:700;background:linear-gradient(135deg,#a78bfa,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.rpt-coins{font-size:12px;color:#f59e0b;font-weight:600;display:flex;align-items:center;gap:2px}
+.rpt-preview-btn{height:28px;padding:0 14px;border:none;border-radius:14px;background:linear-gradient(135deg,#fb7185,#ec4899);color:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit}
+.new-badge{display:inline-flex;align-items:center;height:18px;padding:0 6px;border-radius:9px;border:1px solid #fb7185;color:#fb7185;font-size:10px;font-weight:700}
 
-/* Fixed CTA */
-.fixed-cta{position:sticky;bottom:0;background:linear-gradient(0deg,rgba(12,6,28,1) 0%,rgba(12,6,28,.85) 65%,transparent 100%);padding:20px 16px 14px}
-.cta-hint{text-align:center;font-size:12px;color:rgba(255,255,255,.38);margin-bottom:8px}
+/* ══════ PAGE 3: 报告解锁页 ══════ */
+/* Hero illustration */
+.unlock-hero{height:200px;position:relative;overflow:hidden;background:linear-gradient(160deg,#fff3e8 0%,#ffe0cc 40%,#ffd5c2 100%)}
+.hero-arch{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:140px;height:170px;background:linear-gradient(180deg,#ffcba4,#e8a87c);border-top-left-radius:70px;border-top-right-radius:70px;opacity:.85}
+.hero-arch-inner{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:100px;height:130px;background:linear-gradient(180deg,#fffbf5,#fff8f0);border-top-left-radius:50px;border-top-right-radius:50px}
+.hero-plant-l{position:absolute;left:18px;bottom:10px;font-size:36px;transform:rotate(-15deg)}
+.hero-plant-r{position:absolute;right:14px;bottom:20px;font-size:28px;transform:rotate(12deg)}
+.hero-sparkle{position:absolute;top:20px;right:40px;font-size:20px;animation:sparkle 2s ease-in-out infinite}
+.hero-moon{position:absolute;top:18px;left:30px;font-size:22px}
+@keyframes sparkle{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.2)}}
 
-/* ════════════════ PAGE 4 ════════════════ */
-.rpt-hdr{padding:16px 16px 4px}
-.rpt-mo{font-size:12px;color:rgba(255,255,255,.38);margin-bottom:3px}
-.rpt-main-title{font-size:20px;font-weight:800;color:#fff}
-.rpt-main-sub{font-size:13px;color:#b794f4;margin-top:2px}
+.unlock-top-nav{display:flex;align-items:center;justify-content:space-between;padding:10px 16px 0;background:transparent;position:absolute;top:44px;left:0;right:0;z-index:2}
+.unlock-title-bar{font-size:16px;font-weight:700;color:#3d2060}
+.unlock-date-picker{display:flex;align-items:center;gap:4px;font-size:12px;color:#7c3aed;background:rgba(255,255,255,.7);border-radius:12px;padding:4px 10px}
 
-/* Score card */
-.score-card{margin:10px 16px 10px;background:linear-gradient(135deg,rgba(75,28,145,.38),rgba(28,10,65,.38));border:1px solid rgba(155,111,211,.28);border-radius:20px;padding:18px}
-.score-card-title{font-size:13px;font-weight:600;color:rgba(255,255,255,.75);margin-bottom:2px}
-.score-big{font-size:38px;font-weight:900;color:#fff;line-height:1}
-.score-kw{font-size:12px;color:#b794f4;margin:3px 0 14px}
-.score-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
-.score-row{display:flex;align-items:center;gap:7px}
-.score-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.score-dim{font-size:12px;color:rgba(255,255,255,.55)}
-.score-val{font-size:13px;color:#fff;font-weight:700;margin-left:auto}
+.unlock-chips{display:flex;gap:6px;padding:10px 16px 0}
+.unlock-chip{display:inline-flex;align-items:center;gap:4px;height:24px;padding:0 10px;border-radius:12px;font-size:11px;font-weight:600;background:rgba(255,255,255,.8);border:1px solid rgba(200,160,100,.3);color:#8b6030}
 
-/* Domain card */
-.domain-card{margin:0 16px 8px;background:rgba(255,255,255,.048);border-radius:16px;padding:15px;border-left:3px solid #9b6fd3}
-.dc-hd{display:flex;align-items:center;gap:9px;margin-bottom:9px}
-.dc-ico{font-size:22px}
-.dc-inf{flex:1}
-.dc-name{font-size:15px;font-weight:700;color:#fff}
-.dc-tag{font-size:11px;color:#c9a4ff;margin-top:1px}
-.dc-score{font-size:24px;font-weight:800;color:#c9a4ff}
-.dc-body{font-size:13px;color:rgba(255,255,255,.68);line-height:1.65;margin-bottom:9px}
-.dc-action{background:rgba(155,111,211,.13);border-radius:8px;padding:9px 11px}
-.dc-action-lbl{font-size:10px;color:#c9a4ff;margin-bottom:3px}
-.dc-action-txt{font-size:12.5px;color:rgba(255,255,255,.78);line-height:1.55}
+/* Radar preview card */
+.radar-card{margin:12px 14px 8px;background:#fff;border-radius:18px;padding:16px;box-shadow:0 2px 12px rgba(100,60,200,.06)}
+.radar-card-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.radar-card-title{font-size:14px;font-weight:700;color:#1a1028}
+.radar-lock{color:#c4b8e0;font-size:16px}
+.radar-preview-tag{font-size:10px;color:#8b80a8;background:#f3f0ff;padding:2px 7px;border-radius:4px}
+
+/* Locked domain cards */
+.domain-preview-grid{display:flex;gap:8px;padding:0 14px 8px}
+.domain-prev-card{flex:1;background:#fff;border-radius:14px;padding:11px 10px;box-shadow:0 1px 8px rgba(100,60,200,.06)}
+.domain-prev-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.domain-prev-ico{font-size:20px}
+.domain-prev-lock{font-size:13px;color:#c4b8e0}
+.domain-prev-name{font-size:13px;font-weight:700;color:#1a1028;margin-bottom:3px}
+.domain-prev-desc{font-size:11px;color:#8b80a8;line-height:1.4}
+
+/* Locked row items */
+.locked-rows{padding:0 14px;display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
+.locked-row{background:#fff;border-radius:14px;padding:13px 14px;display:flex;align-items:center;gap:11px;box-shadow:0 1px 8px rgba(100,60,200,.05)}
+.locked-row-ico{font-size:20px}
+.locked-row-info{flex:1}
+.locked-row-title{font-size:14px;font-weight:600;color:#1a1028}
+.locked-row-desc{font-size:11px;color:#8b80a8;margin-top:2px}
+.locked-row-desc.preview{font-size:11px;color:#8b6fd3}
+.locked-row-lock{font-size:15px;color:#c4b8e0}
+
+/* CTA */
+.unlock-cta{padding:16px 14px 0}
+.cta-warm{width:100%;height:52px;border:none;border-radius:26px;background:linear-gradient(135deg,#ff9a5c,#ff6b35);color:#fff;font-size:16px;font-weight:800;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 6px 20px rgba(255,107,53,.30)}
+.cta-purple{width:100%;height:52px;border:none;border-radius:26px;background:linear-gradient(135deg,#a78bfa,#7c3aed);color:#fff;font-size:16px;font-weight:800;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 6px 20px rgba(124,58,237,.28)}
+.data-hint{text-align:center;font-size:11px;color:#c4b8e0;margin-top:10px;display:flex;align-items:center;justify-content:center;gap:4px;padding-bottom:16px}
+
+/* ══════ PAGE 4: 报告内容页 ══════ */
+/* Hero */
+.content-hero{position:relative;height:240px;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(160deg,#fff8f0 0%,#fef0ff 35%,#e8e4ff 70%,#dde8ff 100%)}
+.hero-window{position:absolute;right:16px;top:14px;width:130px;height:185px;background:linear-gradient(180deg,#a8c4e8,#7ba8d4);border-radius:16px 16px 0 0;overflow:hidden}
+.hero-window-pane{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:2px;padding:8px}
+.hero-pane{background:rgba(255,255,255,.15);border-radius:4px}
+.hero-curtain-l{position:absolute;left:0;top:0;bottom:0;width:22px;background:linear-gradient(135deg,#f8c8d8,#f0a8c0);border-radius:0 0 8px 0}
+.hero-curtain-r{position:absolute;right:0;top:0;bottom:0;width:22px;background:linear-gradient(135deg,#f8c8d8,#f0a8c0);border-radius:0 0 0 8px}
+.hero-moon-deco{position:absolute;top:10px;right:12px;font-size:18px}
+.hero-figure{position:absolute;bottom:0;right:0;font-size:70px;line-height:1}
+.hero-plant-deco{position:absolute;bottom:0;left:0;font-size:48px;transform:rotate(-10deg);transform-origin:bottom left}
+.hero-branch{position:absolute;top:0;left:0;right:0;height:60px;background:linear-gradient(160deg,rgba(180,220,140,.35),transparent);pointer-events:none}
+.hero-stars-deco{position:absolute;top:8px;left:50px;font-size:13px;color:rgba(180,160,100,.7);display:flex;gap:16px}
+.hero-text{position:absolute;left:16px;top:30px}
+.hero-main-title{font-size:28px;font-weight:900;color:#3d1a60;line-height:1.1;font-style:italic}
+.hero-sub{font-size:12px;color:#8b6080;margin-top:6px;line-height:1.5}
+.hero-meta{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.hero-chip{display:inline-flex;align-items:center;gap:3px;height:20px;padding:0 8px;border-radius:10px;font-size:10px;font-weight:600;background:rgba(255,255,255,.65);border:1px solid rgba(200,160,100,.25);color:#7c5030}
+
+/* Quote card */
+.quote-card{margin:10px 14px;background:linear-gradient(135deg,#fffdf8,#fff8f0);border-radius:16px;padding:14px 15px;border:1px solid rgba(200,180,150,.2);position:relative}
+.quote-mark{position:absolute;top:6px;left:12px;font-size:28px;color:rgba(180,140,100,.25);font-family:Georgia,serif;line-height:1}
+.quote-text{font-size:14px;color:#5a3820;line-height:1.75;padding-left:4px}
+.quote-heart{text-align:right;font-size:14px;margin-top:4px}
+
+/* Score section */
+.score-area{margin:0 14px 10px;background:#fff;border-radius:18px;padding:16px;box-shadow:0 2px 12px rgba(100,60,200,.06)}
+.score-area-title{font-size:13px;font-weight:600;color:#8b80a8;margin-bottom:2px;display:flex;align-items:center;gap:4px}
+.score-area-title::before,
+.score-area-title::after{content:'✦';font-size:9px;color:#f59e0b}
+.score-top{display:flex;align-items:flex-start;gap:12px}
+.score-left{min-width:80px}
+.score-num-big{font-size:48px;font-weight:900;color:#db2777;line-height:1}
+.score-unit-big{font-size:14px;font-weight:700;color:#db2777}
+.score-desc{font-size:11px;color:#8b80a8;margin-top:4px;line-height:1.5}
+.score-stars{font-size:11px;color:#f59e0b;margin-top:3px}
+
+/* Petal chart SVG */
+.petal-chart-wrap{flex:1;display:flex;justify-content:center;align-items:center}
+
+/* Focus domains section */
+.domain-hd{font-size:13px;font-weight:700;color:#4a3080;text-align:center;margin:2px 0 10px;display:flex;align-items:center;justify-content:center;gap:6px}
+.domain-hd::before,.domain-hd::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(139,92,246,.2))}
+.domain-grid{display:flex;flex-wrap:wrap;gap:8px;padding:0 14px;margin-bottom:10px}
+.domain-card{flex:1;min-width:calc(33% - 6px);background:#fff;border-radius:14px;padding:11px 10px;box-shadow:0 1px 8px rgba(100,60,200,.06);text-align:center}
+.domain-card-ico{font-size:24px;margin-bottom:5px}
+.domain-card-title{font-size:13px;font-weight:700;color:#1a1028;margin-bottom:2px}
+.domain-card-tag{font-size:10px;font-weight:600;padding:1px 6px;border-radius:3px;display:inline-block;margin-bottom:5px}
+.domain-card-body{font-size:11px;color:#8b80a8;line-height:1.5}
 
 /* Moon cards */
-.moon-row{display:flex;gap:8px;padding:0 16px;margin-bottom:10px}
-.moon-card{flex:1;background:rgba(255,255,255,.048);border-radius:16px;padding:14px 12px}
-.moon-card.nm{border:1px solid rgba(120,160,255,.28)}
-.moon-card.fm{border:1px solid rgba(255,200,80,.28)}
-.moon-ico{font-size:22px;margin-bottom:7px}
-.moon-title{font-size:13px;font-weight:700;color:#fff;margin-bottom:6px}
-.moon-body{font-size:12px;color:rgba(255,255,255,.58);line-height:1.6}
-.moon-date{font-size:10px;color:rgba(255,255,255,.3);margin-top:7px}
+.moon-hd{font-size:13px;font-weight:700;color:#4a3080;text-align:center;margin:2px 0 10px;display:flex;align-items:center;justify-content:center;gap:6px}
+.moon-hd::before,.moon-hd::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(139,92,246,.2))}
+.moon-row-cards{display:flex;gap:8px;padding:0 14px;margin-bottom:10px}
+.moon-card-new{flex:1;background:linear-gradient(135deg,#eef4ff,#dde8ff);border-radius:16px;padding:14px 12px;border:1px solid rgba(96,165,250,.2)}
+.moon-card-full{flex:1;background:linear-gradient(135deg,#fff8e8,#fff0cc);border-radius:16px;padding:14px 12px;border:1px solid rgba(245,158,11,.2)}
+.moon-card-ico{font-size:22px;margin-bottom:7px}
+.moon-card-title{font-size:13px;font-weight:700;color:#1a1028;margin-bottom:6px}
+.moon-dots{margin-bottom:2px}
+.moon-dot{font-size:11px;color:#4a6080;line-height:1.7;display:flex;align-items:flex-start;gap:4px}
+.moon-dot::before{content:'·';font-weight:900;flex-shrink:0}
 
-/* Reminder cards */
-.rmdr-list{padding:0 16px;display:flex;flex-direction:column;gap:7px;margin-bottom:10px}
-.rmdr{background:rgba(255,255,255,.048);border-radius:12px;padding:13px;display:flex;align-items:flex-start;gap:11px}
-.rmdr:nth-child(1){border-left:3px solid #4ecdc4}
-.rmdr:nth-child(2){border-left:3px solid #a8e063}
-.rmdr:nth-child(3){border-left:3px solid #f093fb}
-.rmdr-ico{font-size:19px;flex-shrink:0;margin-top:1px}
-.rmdr-lbl{font-size:10px;color:rgba(255,255,255,.38);margin-bottom:3px}
-.rmdr-txt{font-size:13px;color:rgba(255,255,255,.82);line-height:1.55}
+/* Reminder section */
+.reminder-hd{font-size:15px;font-weight:700;color:#1a1028;text-align:center;margin:2px 0 10px;display:flex;align-items:center;justify-content:center;gap:6px}
+.reminder-grid{display:flex;gap:8px;padding:0 14px;margin-bottom:10px}
+.reminder-card{flex:1;border-radius:14px;padding:12px 10px;text-align:center;box-shadow:0 1px 8px rgba(0,0,0,.05)}
+.reminder-card:nth-child(1){background:linear-gradient(160deg,#fff8f0,#ffeedd)}
+.reminder-card:nth-child(2){background:linear-gradient(160deg,#f0f8ff,#e8f4fd)}
+.reminder-card:nth-child(3){background:linear-gradient(160deg,#fdf0ff,#f8e8ff)}
+.reminder-card-ico{font-size:22px;margin-bottom:6px}
+.reminder-card-lbl{font-size:11px;color:#8b80a8;margin-bottom:4px}
+.reminder-card-text{font-size:11px;color:#4a3060;line-height:1.5;font-weight:500}
+.closing{text-align:center;font-size:14px;color:#8b5060;padding:10px 16px 20px;font-weight:500}
+.closing-heart{color:#db2777}
 
-/* Share */
-.share-bar{display:flex;gap:8px;margin:2px 16px 20px}
-.share-btn{flex:1;height:42px;border:1px solid rgba(255,255,255,.18);border-radius:11px;background:transparent;color:rgba(255,255,255,.65);font-size:12.5px;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:5px}
-
-/* Non-member blur */
-.blurred{filter:blur(4px);pointer-events:none;user-select:none}
-.nonmbr-cta{position:sticky;bottom:0;background:linear-gradient(0deg,rgba(12,6,28,1) 0%,rgba(12,6,28,.9) 60%,transparent 100%);padding:24px 16px 16px;text-align:center}
-.nonmbr-hint{font-size:12px;color:rgba(255,255,255,.42);margin-bottom:9px}
-
-/* ════════════════ CONTROLS ════════════════ */
-.controls{margin-top:20px;display:flex;flex-direction:column;align-items:center;gap:8px}
-.ms-wrap{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.07);border-radius:20px;padding:5px 14px}
-.ms-lbl{font-size:12px;color:rgba(255,255,255,.5)}
-.ms-toggle{display:flex;background:rgba(0,0,0,.3);border-radius:16px;padding:2px;gap:2px}
-.ms-opt{height:27px;padding:0 13px;border:none;border-radius:14px;background:transparent;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;color:rgba(255,255,255,.42);transition:all .2s}
-.ms-opt.mbr-on{background:linear-gradient(135deg,#9b6fd3,#6b35a3);color:#fff}
-.ms-opt.non-on{background:rgba(255,255,255,.15);color:#fff}
-.ctrl-hint{font-size:10px;color:rgba(255,255,255,.2);letter-spacing:.5px}
+/* ══ CONTROLS ══ */
+.controls{margin-top:18px;display:flex;flex-direction:column;align-items:center;gap:8px}
+.ms-wrap{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.7);border-radius:20px;padding:5px 14px;box-shadow:0 2px 10px rgba(139,92,246,.10)}
+.ms-lbl{font-size:12px;color:rgba(80,60,120,.6)}
+.ms-toggle{display:flex;background:rgba(139,92,246,.08);border-radius:16px;padding:2px;gap:2px}
+.ms-opt{height:28px;padding:0 14px;border:none;border-radius:14px;background:transparent;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;color:rgba(80,60,120,.5);transition:all .2s}
+.ms-opt.mbr-on{background:linear-gradient(135deg,#a78bfa,#7c3aed);color:#fff}
+.ms-opt.non-on{background:rgba(236,72,153,.15);color:#db2777}
+.ctrl-hint{font-size:10px;color:rgba(100,80,140,.3);letter-spacing:.5px}
 
 /* Paywall toast */
-.paywall{position:fixed;bottom:110px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#2d1b69,#16083a);border:1px solid rgba(155,111,211,.5);border-radius:18px;padding:18px 20px;min-width:290px;text-align:center;z-index:9999;box-shadow:0 12px 40px rgba(0,0,0,.7)}
-.paywall-ico{font-size:22px;margin-bottom:7px}
-.paywall-title{font-size:15px;font-weight:700;color:#fff;margin-bottom:4px}
-.paywall-sub{font-size:12px;color:rgba(255,255,255,.45);margin-bottom:12px}
-.paywall-dismiss{font-size:11px;color:rgba(255,255,255,.3);margin-top:9px;cursor:pointer}
+.paywall{position:fixed;bottom:120px;left:50%;transform:translateX(-50%);background:#fff;border-radius:22px;padding:20px 22px;min-width:300px;text-align:center;z-index:9999;box-shadow:0 16px 48px rgba(139,92,246,.22),0 0 0 1px rgba(139,92,246,.1)}
+.pw-ico{font-size:26px;margin-bottom:8px}
+.pw-title{font-size:16px;font-weight:800;color:#1a1028;margin-bottom:4px}
+.pw-sub{font-size:12px;color:#8b80a8;margin-bottom:14px}
+.pw-btn{width:100%;height:46px;border:none;border-radius:23px;background:linear-gradient(135deg,#a78bfa,#7c3aed);color:#fff;font-size:15px;font-weight:800;cursor:pointer;font-family:inherit}
+.pw-dismiss{font-size:11px;color:#c4b8e0;margin-top:10px;cursor:pointer}
 </style>
 </head>
 <body>
 
-<p class="proto-label">月度报告优化 · 交互原型 · PRD V1.0</p>
+<p class="proto-label">月度报告优化 · 原型 V2 · PRD V1.0</p>
 
 <div class="phone" id="app">
-
-  <!-- Status Bar -->
   <div class="sbar">
-    <span>9:41</span>
-    <span style="letter-spacing:1px">●●●&nbsp;&nbsp;🔋</span>
+    <span>2:12</span>
+    <span style="font-size:10px;letter-spacing:1px">📶 ᵥₒₗₜₑ 🛜 <span style="background:#34c759;color:#fff;padding:1px 5px;border-radius:4px;font-size:10px">76</span></span>
   </div>
 
-  <!-- Page Navigation -->
   <div class="pnav">
     <button class="pnav-btn on" onclick="gotoPage(0,this)">每日心情-月</button>
     <button class="pnav-btn" onclick="gotoPage(1,this)">报告列表</button>
@@ -229,290 +318,456 @@ body{background:#07051a;font-family:-apple-system,'PingFang SC','Hiragino Sans G
     <button class="pnav-btn" onclick="gotoPage(3,this)">报告内容</button>
   </div>
 
-  <!-- Scroll Content -->
-  <div class="content" id="scroller">
+  <div class="scr" id="scroller">
 
-    <!-- ══════════ PAGE 1: 每日心情-月 ══════════ -->
+    <!-- ══ PAGE 1: 每日心情-月 ══ -->
     <div class="page on" id="p0">
+      <div class="top-nav">
+        <span class="nav-back">‹</span>
+        <div class="nav-title">自己 <span style="font-size:14px;color:#a78bfa">↕</span></div>
+        <div class="nav-icons"><span>⏱</span><span>⬆</span></div>
+      </div>
 
-      <div class="mood-hero">
-        <div class="mood-mo">2025年5月 · 运势概览</div>
-        <div class="mood-ring">
-          <div class="mood-ring-n">78</div>
-          <div class="mood-ring-l">综合</div>
-        </div>
-        <div class="mood-kws">
-          <span class="tag tag-v">稳中有升</span>
-          <span class="tag tag-t">事业聚焦</span>
-          <span class="tag tag-b">情感升温</span>
+      <!-- Time tabs -->
+      <div class="time-tabs">
+        <div class="time-tab">日</div>
+        <div class="time-tab">周</div>
+        <div class="time-tab on">月</div>
+        <div class="time-tab">年</div>
+        <div class="view-chart" style="margin-left:auto;padding:0 4px">查看星盘 ›</div>
+      </div>
+
+      <!-- Month scroll -->
+      <div class="month-scroll-wrap">
+        <div class="month-scroll">
+          <div class="month-item">2月</div>
+          <div class="month-item">3月</div>
+          <div class="month-item">4月</div>
+          <div class="month-item on">本月</div>
+          <div class="month-item">6月</div>
+          <div class="month-item">7月</div>
+          <div class="month-item">8月</div>
         </div>
       </div>
 
-      <!-- 月历 -->
-      <div class="sec-hd"><span class="sec-title">本月心情记录</span><span class="sec-more">查看全部</span></div>
-      <div class="card">
-        <div class="card-body">
-          <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:5px;text-align:center">
-            <div style="font-size:10px;color:rgba(255,255,255,.28)">一</div><div style="font-size:10px;color:rgba(255,255,255,.28)">二</div><div style="font-size:10px;color:rgba(255,255,255,.28)">三</div><div style="font-size:10px;color:rgba(255,255,255,.28)">四</div><div style="font-size:10px;color:rgba(255,255,255,.28)">五</div><div style="font-size:10px;color:rgba(255,255,255,.28)">六</div><div style="font-size:10px;color:rgba(255,255,255,.28)">日</div>
-            <div style="font-size:17px">😊</div><div style="font-size:17px">😐</div><div style="font-size:17px">😄</div><div style="font-size:17px">😔</div><div style="font-size:17px">😊</div><div style="font-size:17px">🥳</div><div style="font-size:17px">😌</div>
-            <div style="font-size:17px">😊</div><div style="font-size:17px">😄</div><div style="font-size:17px">😐</div><div style="font-size:17px">😊</div><div style="font-size:17px">😊</div><div style="font-size:17px">😔</div><div style="font-size:17px">😄</div>
-            <div style="font-size:17px">😌</div><div style="font-size:17px">🥳</div><div style="font-size:17px">😊</div><div style="font-size:17px">😄</div><div style="font-size:17px">😐</div><div style="font-size:17px">😊</div><div style="font-size:17px">😔</div>
-            <div style="font-size:17px">😄</div><div style="font-size:17px">😊</div><div style="font-size:17px">😌</div><div style="font-size:17px">🥳</div><div style="font-size:17px">😊</div><div style="font-size:17px">😊</div><div style="font-size:17px">😄</div>
+      <!-- Score section -->
+      <div class="score-section">
+        <div class="score-main-lbl">综合分数</div>
+        <div style="display:flex;align-items:flex-end;gap:16px">
+          <div>
+            <span class="score-main-num">84</span><span class="score-main-unit">分</span>
+          </div>
+          <div class="dim-row" style="margin-top:0;padding-bottom:0">
+            <div class="dim-item">
+              <div class="dim-num" style="color:#f472b6">86</div>
+              <div class="dim-bar-wrap"><div class="dim-bar-fill" style="height:88%;background:#f472b6;border-radius:2px"></div></div>
+              <div class="dim-lbl">爱情</div>
+            </div>
+            <div class="dim-item">
+              <div class="dim-num" style="color:#f59e0b">67</div>
+              <div class="dim-bar-wrap"><div class="dim-bar-fill" style="height:67%;background:#f59e0b;border-radius:2px"></div></div>
+              <div class="dim-lbl">财富</div>
+            </div>
+            <div class="dim-item">
+              <div class="dim-num" style="color:#8b5cf6">96</div>
+              <div class="dim-bar-wrap"><div class="dim-bar-fill" style="height:96%;background:#8b5cf6;border-radius:2px"></div></div>
+              <div class="dim-lbl">事业</div>
+            </div>
+            <div class="dim-item">
+              <div class="dim-num" style="color:#60a5fa">86</div>
+              <div class="dim-bar-wrap"><div class="dim-bar-fill" style="height:86%;background:#60a5fa;border-radius:2px"></div></div>
+              <div class="dim-lbl">学习</div>
+            </div>
+            <div class="dim-item">
+              <div class="dim-num" style="color:#34d399">86</div>
+              <div class="dim-bar-wrap"><div class="dim-bar-fill" style="height:86%;background:#34d399;border-radius:2px"></div></div>
+              <div class="dim-lbl">人际</div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- 心理解读 -->
-      <div class="sec-hd"><span class="sec-title">心理解读</span></div>
-      <div class="card">
-        <div class="card-body">
-          <p style="font-size:13px;color:rgba(255,255,255,.62);line-height:1.7;margin-bottom:10px">本月你的整体心理状态趋于稳定，在处理压力时展现出更成熟的调节能力。情感上有一定波动，但整体向积极方向发展……</p>
-          <div class="skeleton" style="width:65%"></div>
-          <div class="skeleton" style="width:82%"></div>
+      <!-- Banner -->
+      <div class="banner-card">
+        <span class="banner-ico">🤖</span>
+        <div class="banner-info">
+          <div class="banner-title">获得更多引导</div>
+          <div class="banner-sub">快来问问AI，找准方向不迷路</div>
         </div>
+        <button class="banner-btn">立即抽卡</button>
       </div>
 
-      <!-- ★ 月报轻量入口卡片 -->
+      <!-- Expert row -->
+      <div class="expert-row">
+        <div class="expert-ico">💬</div>
+        <div class="expert-t">测测达人在线解读星盘</div>
+        <div class="expert-badge">免费券 ›</div>
+      </div>
+
+      <!-- Psychology section -->
+      <div class="psych-hd">
+        <span class="psych-title">心理解读</span>
+        <div class="psych-right"><span>⇅</span> 影响力</div>
+      </div>
+
+      <!-- ★ 月报入口卡片 KEY COMPONENT -->
       <div class="entry-card">
         <div class="entry-head">
-          <span class="entry-ico">🌙</span>
-          <div class="entry-ttl">本月<strong>重点关注领域</strong></div>
+          <span class="entry-star">☆</span>
+          <span class="entry-title-main">本月重点关注领域</span>
+          <div class="entry-tags" id="entryTags">
+            <span class="tag" style="background:rgba(139,92,246,.10);color:#7c3aed">事业发展</span>
+            <span class="tag" style="background:rgba(249,115,22,.10);color:#ea580c">财富收支</span>
+            <span class="tag" style="background:rgba(96,165,250,.12);color:#2563eb">情绪自我</span>
+          </div>
         </div>
-        <div class="dtags">
-          <span class="dtag">💰 财富</span>
-          <span class="dtag">💕 感情</span>
-          <span class="dtag">⭐ 事业</span>
+        <div class="entry-body" id="entryBody">完整月报已生成，查看本月重点与行动建议</div>
+        <div class="entry-footer">
+          <div id="entryLock"></div>
+          <div class="entry-cta-mbr" id="entryCta" onclick="entryClick()">查看月度报告 ›</div>
         </div>
-        <div class="entry-foot">
-          <span class="entry-hint" id="entryHint">本月重点领域及流月建议已生成</span>
-          <button class="entry-btn mbr" id="entryBtn" onclick="entryClick()">查看月度报告</button>
+      </div>
+
+      <!-- Article card -->
+      <div class="mood-article">
+        <div class="mood-article-img">🌸💫</div>
+        <div class="mood-article-body">
+          <div class="mood-article-title">财务与交际</div>
+          <p class="mood-article-text">最近可以说是大展宏图的时期。你可能变成突然花级别的社交达人，享受着众星捧月的待遇，甚至突然走红也说不准。你能够欣赏美的事 <span class="mood-article-expand">…全文</span></p>
         </div>
       </div>
 
       <div class="spacer"></div>
-    </div><!-- /p0 -->
+    </div>
 
-    <!-- ══════════ PAGE 2: 报告列表 ══════════ -->
+    <!-- ══ PAGE 2: 报告列表 ══ -->
     <div class="page" id="p1">
+      <div class="rpt-top-nav">
+        <span class="nav-back">‹</span>
+        <span class="rpt-nav-title">报告</span>
+        <div class="rpt-nav-icons"><span>⇅</span><span>📋</span></div>
+      </div>
 
-      <!-- SVIP Banner -->
+      <!-- Category tabs -->
+      <div class="cat-tabs">
+        <button class="cat-tab on">全部</button>
+        <button class="cat-tab">解读</button>
+        <button class="cat-tab">情感</button>
+        <button class="cat-tab">财富</button>
+        <button class="cat-tab">自我成长</button>
+      </div>
+
+      <!-- SVIP bar -->
       <div class="svip-bar">
-        <span class="svip-cr">👑</span>
-        <div class="svip-info">
-          <div class="svip-name">解锁全部会员专属报告</div>
-          <div class="svip-desc">月度运势 · 专项分析 · 每日解读</div>
-        </div>
-        <button class="svip-btn" id="svipBtn" onclick="svipClick()">立即开通</button>
+        <span class="svip-crown">👑</span>
+        <span class="svip-text">SVIP &nbsp; 开通SVIP，获取每月免费解锁2份报告权益</span>
+        <span class="svip-arrow">›</span>
       </div>
 
-      <div class="sec-hd"><span class="sec-title">全部报告</span><span class="sec-more">筛选</span></div>
-
-      <!-- ★ 月报窄版权益条 -->
-      <div class="rbar">
-        <span class="rbar-ico">🌙</span>
-        <div class="rbar-info">
-          <div class="rbar-title">
-            月度运势报告
-            <span class="tag tag-v" id="rbarTag">每月更新</span>
+      <!-- ★ 月报特殊卡片 KEY COMPONENT -->
+      <div class="monthly-rpt-card">
+        <div class="monthly-rpt-top">
+          <div class="monthly-rpt-illo">📅</div>
+          <div class="monthly-rpt-info">
+            <div class="monthly-rpt-title">
+              月度运势报告
+              <span class="chip chip-v" style="font-size:10px">会员专属</span>
+              <span class="chip" style="background:rgba(52,211,153,.12);color:#059669;font-size:10px">每月更新</span>
+            </div>
+            <div class="monthly-rpt-desc" id="rptCardDesc">已为你生成5月报告<br>查看本月重点与行动建议</div>
           </div>
-          <div class="rbar-sub">
-            <span class="tag tag-g" style="height:18px;font-size:10px">会员专属</span>
-            <span style="font-size:10px;color:rgba(255,255,255,.3)">5月已生成</span>
+          <button class="monthly-rpt-btn-mbr" id="rptCardBtn" onclick="gotoPage(2,document.querySelectorAll('.pnav-btn')[2])">
+            查看月报 ›
+          </button>
+        </div>
+      </div>
+
+      <!-- Regular reports -->
+      <div class="rpt-card">
+        <div class="rpt-thumb">💑</div>
+        <div class="rpt-info">
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px">
+            <span class="rpt-name">未来伴侣特质报告</span>
+            <span class="new-badge">NEW</span>
+          </div>
+          <div class="rpt-desc">勾勒最适合与你共度一生的人</div>
+          <div class="rpt-unlock">36人已解锁</div>
+          <div class="rpt-foot">
+            <div class="rpt-price">
+              <span class="rpt-vip">VIP 17.1</span>
+              <span class="rpt-coins">🪙 19</span>
+            </div>
+            <button class="rpt-preview-btn">预览报告</button>
           </div>
         </div>
-        <button class="rbar-btn mbr" id="rbarBtn" onclick="rbarClick()">查看报告</button>
       </div>
 
-      <!-- 普通报告卡 -->
       <div class="rpt-card">
-        <div class="rpt-img">☀️</div>
-        <div class="rpt-inf"><div class="rpt-n">今日综合运势</div><div class="rpt-d">事业 · 情感 · 财富全解读</div></div>
-        <div class="rpt-price">免费</div>
-      </div>
-      <div class="rpt-card">
-        <div class="rpt-img">💫</div>
-        <div class="rpt-inf"><div class="rpt-n">本周运势报告</div><div class="rpt-d">7天详细走势</div></div>
-        <div class="rpt-price">30金币</div>
-      </div>
-      <div class="rpt-card">
-        <div class="rpt-img">♏</div>
-        <div class="rpt-inf"><div class="rpt-n">星座深度分析</div><div class="rpt-d">性格全面解读</div></div>
-        <div class="rpt-price">60金币</div>
-      </div>
-      <div class="rpt-card">
-        <div class="rpt-img">💑</div>
-        <div class="rpt-inf"><div class="rpt-n">感情合盘报告</div><div class="rpt-d">双方能量解析</div></div>
-        <div class="rpt-price">88金币</div>
+        <div class="rpt-thumb">💒</div>
+        <div class="rpt-info">
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px">
+            <span class="rpt-name">婚姻匹配度合盘报告</span>
+            <span class="new-badge">NEW</span>
+          </div>
+          <div class="rpt-desc">从安全感到事业家庭，看的机械深入…</div>
+          <div class="rpt-unlock">1592人已解锁</div>
+          <div class="rpt-foot">
+            <div class="rpt-price">
+              <span class="rpt-vip">VIP 35.1</span>
+              <span class="rpt-coins">🪙 39</span>
+            </div>
+            <button class="rpt-preview-btn">预览报告</button>
+          </div>
+        </div>
       </div>
 
-      <div class="spacer"></div>
-    </div><!-- /p1 -->
+      <div class="rpt-card">
+        <div class="rpt-thumb">🌹</div>
+        <div class="rpt-info">
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px">
+            <span class="rpt-name">缘分合盘深度分析报告</span>
+            <span class="new-badge">NEW</span>
+          </div>
+          <div class="rpt-desc">从恋爱日常、金钱观与信任沟通</div>
+          <div class="rpt-unlock">5371人已解锁</div>
+          <div class="rpt-foot">
+            <div class="rpt-price">
+              <span class="rpt-vip">VIP 35.1</span>
+              <span class="rpt-coins">🪙 59</span>
+            </div>
+            <button class="rpt-preview-btn">预览报告</button>
+          </div>
+        </div>
+      </div>
 
-    <!-- ══════════ PAGE 3: 报告解锁页 ══════════ -->
+      <div style="text-align:center;font-size:10px;color:#c4b8e0;padding:8px 0 20px">* 仅为设计示意，具体以最终上线为准</div>
+    </div>
+
+    <!-- ══ PAGE 3: 报告解锁页 ══ -->
     <div class="page" id="p2">
-
+      <!-- Hero illustration -->
       <div class="unlock-hero">
-        <div class="unlock-title">2025年5月 月度报告</div>
-        <div class="unlock-sub">基于你的完整心情记录生成</div>
-        <!-- Radar -->
-        <div class="radar-wrap">
-          <svg id="radar1" width="200" height="200" viewBox="0 0 200 200"></svg>
-          <div class="radar-badge">
-            <div class="radar-score">78</div>
-            <div class="radar-lbl">综合评分</div>
+        <div class="hero-bg"></div>
+        <div class="hero-arch"></div>
+        <div class="hero-arch-inner"></div>
+        <span class="hero-plant-l">🌿</span>
+        <span class="hero-plant-r">🌱</span>
+        <span class="hero-sparkle">✨</span>
+        <span class="hero-moon">🌙</span>
+        <div style="position:absolute;bottom:8px;right:30px;font-size:13px;color:rgba(180,120,80,.5)">✦ ✦</div>
+        <div class="unlock-top-nav">
+          <span style="font-size:20px;color:#3d2060">‹</span>
+          <span class="unlock-title-bar">我的月度报告</span>
+          <span class="unlock-date-picker">2025年5月 ∨</span>
+        </div>
+      </div>
+
+      <!-- Chips -->
+      <div class="unlock-chips">
+        <div class="unlock-chip">📅 每月自动更新</div>
+        <div class="unlock-chip">👑 会员专属</div>
+      </div>
+
+      <!-- Radar preview -->
+      <div class="radar-card">
+        <div class="radar-card-hd">
+          <span class="radar-card-title">整体趋势预览</span>
+          <span class="radar-preview-tag">预览</span>
+          <span class="radar-lock" id="radarLock">🔒</span>
+        </div>
+        <div style="display:flex;justify-content:center">
+          <svg id="radarUnlock" width="200" height="180" viewBox="0 0 200 180"></svg>
+        </div>
+      </div>
+
+      <!-- Domain cards preview -->
+      <div style="padding:0 14px;margin-bottom:6px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+          <span style="font-size:14px;font-weight:700;color:#1a1028">重点关注领域</span>
+          <span style="font-size:10px;color:#8b80a8;background:#f3f0ff;padding:2px 7px;border-radius:4px">预览</span>
+        </div>
+      </div>
+      <div class="domain-preview-grid">
+        <div class="domain-prev-card">
+          <div class="domain-prev-top"><span class="domain-prev-ico">💰</span><span class="domain-prev-lock" id="domLock1">🔒</span></div>
+          <div class="domain-prev-name">财富</div>
+          <div class="domain-prev-desc" id="domDesc1">机遇与波动并存</div>
+        </div>
+        <div class="domain-prev-card">
+          <div class="domain-prev-top"><span class="domain-prev-ico">💚</span><span class="domain-prev-lock" id="domLock2">🔒</span></div>
+          <div class="domain-prev-name">健康</div>
+          <div class="domain-prev-desc" id="domDesc2">注意身心平衡</div>
+        </div>
+        <div class="domain-prev-card">
+          <div class="domain-prev-top"><span class="domain-prev-ico">🙂</span><span class="domain-prev-lock" id="domLock3">🔒</span></div>
+          <div class="domain-prev-name">心理</div>
+          <div class="domain-prev-desc" id="domDesc3">情绪波动需留意</div>
+        </div>
+      </div>
+
+      <!-- Locked rows -->
+      <div class="locked-rows">
+        <div class="locked-row">
+          <span class="locked-row-ico">✦</span>
+          <div class="locked-row-info">
+            <div class="locked-row-title">许愿 &amp; 清理</div>
+            <div class="locked-row-desc preview" id="wishDesc">本月适合：学业进阶、情绪稳定</div>
           </div>
+          <span class="locked-row-lock" id="wishLock">🔒</span>
+        </div>
+        <div class="locked-row">
+          <span class="locked-row-ico">🔔</span>
+          <div class="locked-row-info">
+            <div class="locked-row-title">流月提醒</div>
+            <div class="locked-row-desc preview" id="remindDesc">本月有 3 个关键时间段，影响重要决定</div>
+          </div>
+          <span class="locked-row-lock" id="remindLock">🔒</span>
         </div>
       </div>
 
-      <!-- 重点领域预览 -->
-      <div class="prev-sec">
-        <div class="prev-lbl">🔓 本月重点关注领域 · 预览</div>
-        <div class="prev-grid">
-          <div class="prev-card"><div class="prev-ico">💰</div><div class="prev-name">财富</div><div class="prev-score">85</div></div>
-          <div class="prev-card"><div class="prev-ico">💕</div><div class="prev-name">感情</div><div class="prev-score">72</div></div>
-          <div class="prev-card"><div class="prev-ico">⭐</div><div class="prev-name">事业</div><div class="prev-score">80</div></div>
-        </div>
+      <!-- CTA -->
+      <div class="unlock-cta">
+        <button class="cta-warm" id="ctaBtn" onclick="unlockClick()">👑 会员免费看完整报告 &nbsp;›</button>
       </div>
+      <div class="data-hint" id="dataHint">🔒 数据加密保护，仅你可见</div>
+    </div>
 
-      <!-- 锁定模块 -->
-      <div class="locked-list">
-        <div class="locked-lbl">以下内容需解锁查看</div>
-        <div class="lck-row">
-          <span class="lck-ico">🌑</span>
-          <div class="lck-inf"><div class="lck-n">新月许愿 &amp; 满月清理</div><div class="lck-d">本月行动指引，专属许愿方向</div></div>
-          <span class="lck-lock">🔒</span>
-        </div>
-        <div class="lck-row">
-          <span class="lck-ico">✨</span>
-          <div class="lck-inf"><div class="lck-n">流月提醒</div><div class="lck-d">生活重点 · 内心状态 · 重点提醒</div></div>
-          <span class="lck-lock">🔒</span>
-        </div>
-        <div class="lck-row">
-          <span class="lck-ico">📊</span>
-          <div class="lck-inf"><div class="lck-n">各维度详细解读</div><div class="lck-d">7大维度逐项分析与行动建议</div></div>
-          <span class="lck-lock">🔒</span>
-        </div>
-      </div>
-
-      <!-- 固定 CTA -->
-      <div class="fixed-cta">
-        <div class="cta-hint" id="ctaHint">会员免费解锁完整月报</div>
-        <button class="btn-purple" id="ctaBtn" onclick="unlockClick()">点击解锁月度报告</button>
-      </div>
-
-    </div><!-- /p2 -->
-
-    <!-- ══════════ PAGE 4: 报告内容页 ══════════ -->
+    <!-- ══ PAGE 4: 报告内容页 ══ -->
     <div class="page" id="p3">
-
-      <div class="rpt-hdr">
-        <div class="rpt-mo">🌙 2025年5月</div>
-        <div class="rpt-main-title">月度运势报告</div>
-        <div class="rpt-main-sub">综合评分 78分 · 稳中有升</div>
-      </div>
-
-      <!-- 模块一：月度分数雷达图 -->
-      <div class="score-card">
-        <div class="score-card-title">📊 月度综合评分</div>
-        <div class="score-big">78 <span style="font-size:14px;color:rgba(255,255,255,.35)">/ 100</span></div>
-        <div class="score-kw">本月关键词：稳中有升 · 聚焦突破</div>
-        <svg id="radar2" width="280" height="220" viewBox="0 0 280 220" style="display:block;margin:0 auto"></svg>
-        <div class="score-grid">
-          <div class="score-row"><span class="score-dot" style="background:#c9a4ff"></span><span class="score-dim">财务</span><span class="score-val">85</span></div>
-          <div class="score-row"><span class="score-dot" style="background:#f093fb"></span><span class="score-dim">情感</span><span class="score-val">72</span></div>
-          <div class="score-row"><span class="score-dot" style="background:#4ecdc4"></span><span class="score-dim">事业</span><span class="score-val">80</span></div>
-          <div class="score-row"><span class="score-dot" style="background:#a8e063"></span><span class="score-dim">健康</span><span class="score-val">88</span></div>
-          <div class="score-row"><span class="score-dot" style="background:#f5c842"></span><span class="score-dim">心理</span><span class="score-val">75</span></div>
-          <div class="score-row"><span class="score-dot" style="background:#5eb3f0"></span><span class="score-dim">人际</span><span class="score-val">82</span></div>
-          <div class="score-row"><span class="score-dot" style="background:#ff9a9e"></span><span class="score-dim">学业</span><span class="score-val">68</span></div>
+      <!-- Hero -->
+      <div class="content-hero">
+        <div class="hero-bg"></div>
+        <div class="hero-branch"></div>
+        <div class="hero-stars-deco"><span>✦</span><span>★</span><span>✦</span></div>
+        <div class="hero-window">
+          <div class="hero-window-pane">
+            <div class="hero-pane"></div><div class="hero-pane"></div>
+            <div class="hero-pane"></div><div class="hero-pane"></div>
+          </div>
+          <div class="hero-curtain-l"></div>
+          <div class="hero-curtain-r"></div>
+          <div class="hero-moon-deco">🌙</div>
+        </div>
+        <div class="hero-figure">🧘‍♀️</div>
+        <div class="hero-plant-deco">🌿</div>
+        <div class="hero-text">
+          <div class="hero-main-title">我的<br>月度报告</div>
+          <div class="hero-sub">月光温柔照拂，<br>指引前行的方向</div>
+          <div class="hero-meta">
+            <span class="hero-chip">🌙 2026年5月 · 为你定制</span>
+          </div>
         </div>
       </div>
 
-      <!-- 模块二：重点关注领域 -->
-      <div class="sec-hd"><span class="sec-title">🎯 本月重点关注领域</span></div>
-      <div id="m2">
+      <!-- Quote card -->
+      <div class="quote-card" id="quoteCard">
+        <div class="quote-mark">"</div>
+        <div class="quote-text">事情没那么糟，<br>把心安放好，<br>日子会慢慢亮起来。</div>
+        <div class="quote-heart">❤</div>
+      </div>
+
+      <!-- Score area -->
+      <div class="score-area" id="scoreArea">
+        <div class="score-area-title">月度分数</div>
+        <div class="score-top">
+          <div class="score-left">
+            <span class="score-num-big">75</span><span class="score-unit-big">分</span>
+            <div class="score-desc">本月整体运势良好<br>保持节奏，继续发光！</div>
+            <div class="score-stars">🌙 ✦ ☆</div>
+          </div>
+          <div class="petal-chart-wrap">
+            <svg id="petalChart" width="180" height="180" viewBox="0 0 180 180"></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Domain focus -->
+      <div class="sec-hd" style="padding-top:4px">
+        <span class="sec-t">本月重点关注领域</span>
+      </div>
+      <div class="domain-hd" id="domHd">→ 本月重点关注领域 ←</div>
+
+      <div class="domain-grid" id="domainGrid">
         <div class="domain-card">
-          <div class="dc-hd">
-            <span class="dc-ico">💰</span>
-            <div class="dc-inf"><div class="dc-name">财富领域</div><div class="dc-tag">木星进入第二宫 · 财运上升期</div></div>
-            <div class="dc-score">85</div>
-          </div>
-          <div class="dc-body">本月木星驻守你的财富宫，是扩张收入渠道的好时机。适合主动争取加薪、谈判项目合作，或考虑低风险理财配置。</div>
-          <div class="dc-action"><div class="dc-action-lbl">✅ 行动建议</div><div class="dc-action-txt">月中前完成一次主动的收入洽谈；避开月末（28-31日）的大额支出决策。</div></div>
+          <div class="domain-card-ico">💰</div>
+          <div class="domain-card-title">财富</div>
+          <div class="domain-card-tag" style="background:rgba(245,158,11,.12);color:#b45309">事情没那么糟</div>
+          <div class="domain-card-body">财务紧张感减轻，更懂得规划与储蓄，稳中向好。</div>
         </div>
-
-        <div class="domain-card" style="border-left-color:#f093fb">
-          <div class="dc-hd">
-            <span class="dc-ico">⭐</span>
-            <div class="dc-inf"><div class="dc-name">事业领域</div><div class="dc-tag">火星入第十宫 · 执行力强劲</div></div>
-            <div class="dc-score" style="color:#f093fb">80</div>
-          </div>
-          <div class="dc-body">火星为你注入强劲执行力，拖延已久的项目现在推进会事半功倍。注意团队协作中的表达方式，避免因急于求成引发摩擦。</div>
-          <div class="dc-action" style="background:rgba(240,147,251,.1)"><div class="dc-action-lbl" style="color:#f093fb">✅ 行动建议</div><div class="dc-action-txt">第2、3周是推进重要项目的黄金窗口；领导力表现会被上级注意到。</div></div>
+        <div class="domain-card">
+          <div class="domain-card-ico">💕</div>
+          <div class="domain-card-title">感情</div>
+          <div class="domain-card-tag" style="background:rgba(244,114,182,.12);color:#be185d">亲密的边界</div>
+          <div class="domain-card-body">关系更趋稳定，在亲密中学会设边界，彼此更舒适。</div>
         </div>
-
-        <div class="domain-card" style="border-left-color:#4ecdc4">
-          <div class="dc-hd">
-            <span class="dc-ico">💕</span>
-            <div class="dc-inf"><div class="dc-name">感情领域</div><div class="dc-tag">金星合轴 · 情感升温</div></div>
-            <div class="dc-score" style="color:#4ecdc4">72</div>
-          </div>
-          <div class="dc-body">金星经过你的上升点，外在魅力与亲和力提升。单身者有增加新缘分的机会，有伴侣者关系会更加温暖细腻。</div>
-          <div class="dc-action" style="background:rgba(78,205,196,.1)"><div class="dc-action-lbl" style="color:#4ecdc4">✅ 行动建议</div><div class="dc-action-txt">月初适合约会或表达心意；月中留意生活中新认识的人，可能有意想不到的缘分。</div></div>
+        <div class="domain-card">
+          <div class="domain-card-ico">⭐</div>
+          <div class="domain-card-title">事业</div>
+          <div class="domain-card-tag" style="background:rgba(139,92,246,.12);color:#6d28d9">做对的事不累</div>
+          <div class="domain-card-body">方向逐渐清晰，效率提升，踏实前行有回报。</div>
         </div>
-      </div><!-- /m2 -->
-
-      <!-- 模块三：新月许愿 & 满月清理 -->
-      <div class="sec-hd"><span class="sec-title">🌑🌕 新月许愿 &amp; 满月清理</span></div>
-      <div id="m3">
-        <div class="moon-row">
-          <div class="moon-card nm">
-            <div class="moon-ico">🌑</div>
-            <div class="moon-title">新月许愿</div>
-            <div class="moon-body">适合许下与沟通、学习、人际连接相关的愿望。写下你想建立的新关系或想开始的课程。</div>
-            <div class="moon-date">5月7日 · 金牛座新月</div>
-          </div>
-          <div class="moon-card fm">
-            <div class="moon-ico">🌕</div>
-            <div class="moon-title">满月清理</div>
-            <div class="moon-body">放下对不切实际期待的执念；清理过度理想化的情感幻想和无法落地的宏大计划。</div>
-            <div class="moon-date">5月23日 · 射手座满月</div>
-          </div>
+        <div class="domain-card">
+          <div class="domain-card-ico">📚</div>
+          <div class="domain-card-title">沟通与<br>学习状态</div>
+          <div class="domain-card-tag" style="background:rgba(96,165,250,.12);color:#1d4ed8">心力清耗</div>
+          <div class="domain-card-body">任务繁多易分心，学会专注与取舍，提升效率。</div>
         </div>
-      </div><!-- /m3 -->
-
-      <!-- 模块四：流月提醒 -->
-      <div class="sec-hd"><span class="sec-title">✨ 流月提醒</span></div>
-      <div id="m4">
-        <div class="rmdr-list">
-          <div class="rmdr"><span class="rmdr-ico">🏠</span><div><div class="rmdr-lbl">生活重点</div><div class="rmdr-txt">关注财务健康，月末前完成一次收支盘点；避免情绪化的大额消费决策。</div></div></div>
-          <div class="rmdr"><span class="rmdr-ico">🌿</span><div><div class="rmdr-lbl">内心状态</div><div class="rmdr-txt">本月情绪较为敏感，尤其中旬前后。多给自己留白，不必强迫"永远积极"。</div></div></div>
-          <div class="rmdr"><span class="rmdr-ico">⚡</span><div><div class="rmdr-lbl">重点提醒</div><div class="rmdr-txt">工作沟通需要更多耐心，避免在疲惫时发出重要邮件或做关键表达。</div></div></div>
+        <div class="domain-card">
+          <div class="domain-card-ico">🌿</div>
+          <div class="domain-card-title">心理与<br>自我</div>
+          <div class="domain-card-tag" style="background:rgba(52,211,153,.12);color:#065f46">安放自我</div>
+          <div class="domain-card-body">给自己更多理解与休息，内心更安稳。</div>
         </div>
-      </div><!-- /m4 -->
-
-      <!-- 分享 -->
-      <div class="share-bar" id="shareBar">
-        <button class="share-btn">📤 分享报告</button>
-        <button class="share-btn">🖼️ 保存图片</button>
       </div>
 
-      <div class="spacer"></div>
-    </div><!-- /p3 -->
+      <!-- Moon cards -->
+      <div class="moon-hd">→ 新月许愿 &amp; 满月释怀 ←</div>
+      <div class="moon-row-cards" id="moonCards">
+        <div class="moon-card-new">
+          <div class="moon-card-ico">🌙✨</div>
+          <div class="moon-card-title">新月许愿</div>
+          <div class="moon-dots">
+            <div class="moon-dot">为自己的未来播下希望</div>
+            <div class="moon-dot">新关系、新机会、新开始</div>
+          </div>
+        </div>
+        <div class="moon-card-full">
+          <div class="moon-card-ico">🏮</div>
+          <div class="moon-card-title">满月释怀</div>
+          <div class="moon-dots">
+            <div class="moon-dot">放下不再适合的关系</div>
+            <div class="moon-dot">放下焦虑与无力感</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reminders -->
+      <div class="reminder-hd">流月提示</div>
+      <div class="reminder-grid" id="reminderGrid">
+        <div class="reminder-card">
+          <div class="reminder-card-ico">🍵</div>
+          <div class="reminder-card-lbl">生活重点</div>
+          <div class="reminder-card-text">照顾好自己，身心安稳，好运才会靠近。</div>
+        </div>
+        <div class="reminder-card">
+          <div class="reminder-card-ico">🪟</div>
+          <div class="reminder-card-lbl">内心状态</div>
+          <div class="reminder-card-text">#洞察世事<br>看清趋势，不盲目跟风，保持清醒与独立。</div>
+        </div>
+        <div class="reminder-card">
+          <div class="reminder-card-ico">🌸</div>
+          <div class="reminder-card-lbl">重点提醒</div>
+          <div class="reminder-card-text">拒绝清耗与烂桃花，把精力放在值得的人与事上。</div>
+        </div>
+      </div>
+
+      <div class="closing" id="closing">这个月，请把温柔留给自己。<span class="closing-heart">❤</span></div>
+    </div>
 
   </div><!-- /scroller -->
-
-  <!-- Tab Bar -->
-  <div class="tbar">
-    <div class="tab on"><span class="tab-ico">🌙</span><span class="tab-lbl">心情</span></div>
-    <div class="tab"><span class="tab-ico">📊</span><span class="tab-lbl">报告</span></div>
-    <div class="tab"><span class="tab-ico">🔮</span><span class="tab-lbl">解读</span></div>
-    <div class="tab"><span class="tab-ico">👤</span><span class="tab-lbl">我的</span></div>
-  </div>
-
 </div><!-- /phone -->
 
-<!-- 外部控制 -->
+<!-- Controls -->
 <div class="controls">
   <div class="ms-wrap">
     <span class="ms-lbl">用户状态</span>
@@ -525,20 +780,20 @@ body{background:#07051a;font-family:-apple-system,'PingFang SC','Hiragino Sans G
 </div>
 
 <script>
-// ─── state ───
 let mbr = true, curPage = 0;
+const SVG_NS = 'http://www.w3.org/2000/svg';
 
-// ─── page nav ───
+// ── Page navigation ──
 function gotoPage(i, btn) {
   document.querySelectorAll('.page').forEach((p,j) => p.classList.toggle('on', j===i));
   document.querySelectorAll('.pnav-btn').forEach((b,j) => b.classList.toggle('on', j===i));
   curPage = i;
   document.getElementById('scroller').scrollTop = 0;
-  if(i===2) drawRadar('radar1',200,200,false);
-  if(i===3) drawRadar('radar2',280,220,true);
+  if(i===2) { drawPolygonRadar('radarUnlock', 200, 180); }
+  if(i===3) { drawPetalChart('petalChart', 180, 180); }
 }
 
-// ─── member toggle ───
+// ── Member state ──
 function setMbr(v) {
   mbr = v;
   document.getElementById('bM').className = 'ms-opt' + (v?' mbr-on':'');
@@ -548,133 +803,172 @@ function setMbr(v) {
 
 function applyState() {
   // Page 1 entry card
-  const eBtn = document.getElementById('entryBtn');
-  const eHint = document.getElementById('entryHint');
+  const entryBody = document.getElementById('entryBody');
+  const entryCta = document.getElementById('entryCta');
+  const entryLock = document.getElementById('entryLock');
   if(mbr) {
-    eBtn.textContent = '查看月度报告'; eBtn.className='entry-btn mbr';
-    eHint.textContent = '本月重点领域及流月建议已生成';
+    entryBody.textContent = '完整月报已生成，查看本月重点与行动建议';
+    entryCta.className = 'entry-cta-mbr'; entryCta.textContent = '查看月度报告 ›';
+    entryLock.innerHTML = '';
   } else {
-    eBtn.textContent = '开通会员查看'; eBtn.className='entry-btn non';
-    eHint.textContent = '开通会员，查看完整重点及流月建议';
+    entryBody.textContent = '开通会员后，可查看完整重点领域、许愿&清理、流月提醒';
+    entryCta.className = 'entry-cta-non'; entryCta.textContent = '开通后查看 ›';
+    entryLock.innerHTML = '<span style="color:#c4b8e0;font-size:15px">🔒</span>';
   }
 
-  // Page 2 rights bar
-  const rb = document.getElementById('rbarBtn');
-  const rt = document.getElementById('rbarTag');
-  const sb = document.getElementById('svipBtn');
+  // Page 2 monthly card
+  const rptCardDesc = document.getElementById('rptCardDesc');
+  const rptCardBtn = document.getElementById('rptCardBtn');
   if(mbr) {
-    rb.textContent='查看报告'; rb.className='rbar-btn mbr';
-    rt.textContent='每月更新';
-    sb.textContent='已开通'; sb.className='svip-btn done';
+    rptCardDesc.innerHTML = '已为你生成5月报告<br>查看本月重点与行动建议';
+    rptCardBtn.className = 'monthly-rpt-btn-mbr'; rptCardBtn.textContent = '查看月报 ›';
   } else {
-    rb.textContent='开通会员'; rb.className='rbar-btn non';
-    rt.textContent='会员专属';
-    sb.textContent='立即开通'; sb.className='svip-btn';
+    rptCardDesc.innerHTML = '开通会员后，每月自动更新月度报告<br>查看本月重点与行动建议';
+    rptCardBtn.className = 'monthly-rpt-btn-non'; rptCardBtn.textContent = '开通查看 ›';
   }
 
-  // Page 3 CTA
-  const cb = document.getElementById('ctaBtn');
-  const ch = document.getElementById('ctaHint');
+  // Page 3 unlock page
+  const ctaBtn = document.getElementById('ctaBtn');
+  const lockIds = ['domLock1','domLock2','domLock3','wishLock','remindLock','radarLock'];
   if(mbr) {
-    cb.textContent='点击解锁月度报告'; cb.className='btn-purple';
-    ch.textContent='会员免费解锁完整月报';
+    ctaBtn.className = 'cta-purple'; ctaBtn.innerHTML = '👑 点击解锁完整月报 &nbsp;›';
+    lockIds.forEach(id => { const el=document.getElementById(id); if(el) el.style.display='none'; });
   } else {
-    cb.textContent='开通会员解锁报告'; cb.className='btn-gold';
-    ch.textContent='首月 ¥18 · 随时可取消';
+    ctaBtn.className = 'cta-warm'; ctaBtn.innerHTML = '👑 会员免费看完整报告 &nbsp;›';
+    lockIds.forEach(id => { const el=document.getElementById(id); if(el) el.style.display=''; });
   }
 
-  // Page 4 content blur
-  ['m2','m3','m4','shareBar'].forEach(id => {
-    const el = document.getElementById(id);
-    if(el) el.className = el.id.startsWith('share') ? (mbr?'share-bar':'share-bar blurred') : (mbr?'':'blurred');
-  });
-
-  // Non-member CTA overlay on page 4
-  let ov = document.getElementById('p3overlay');
+  // Page 4 blur for non-member
+  const p4Sections = ['quoteCard','scoreArea','domainGrid','moonCards','reminderGrid','closing'];
+  const overlay = document.getElementById('p3overlay');
   if(!mbr) {
-    if(!ov) {
-      ov = document.createElement('div');
+    p4Sections.slice(1).forEach(id => {
+      const el=document.getElementById(id); if(el){el.style.filter='blur(5px)';el.style.pointerEvents='none';}
+    });
+    if(!overlay) {
+      const ov = document.createElement('div');
       ov.id = 'p3overlay';
-      ov.className = 'nonmbr-cta';
-      ov.innerHTML = '<div class="nonmbr-hint">完整月度报告需会员解锁</div><button class="btn-gold" style="max-width:260px;margin:0 auto;display:block" onclick="showPaywall()">开通会员，解锁完整月报</button>';
+      ov.style.cssText='position:sticky;bottom:0;background:linear-gradient(0,rgba(240,236,255,1)0%,rgba(240,236,255,.9)55%,transparent100%);padding:28px 14px 16px;text-align:center';
+      ov.innerHTML='<div style="font-size:12px;color:#8b80a8;margin-bottom:10px">完整月度报告需会员解锁</div><button onclick="showPaywall()" style="width:100%;height:50px;border:none;border-radius:25px;background:linear-gradient(135deg,#a78bfa,#7c3aed);color:#fff;font-size:15px;font-weight:800;cursor:pointer;font-family:inherit;box-shadow:0 6px 20px rgba(124,58,237,.28)">👑 开通会员，查看完整月报</button>';
       document.getElementById('p3').appendChild(ov);
-    }
-    ov.style.display='';
+    } else { ov.style.display=''; }
   } else {
-    if(ov) ov.style.display='none';
+    p4Sections.forEach(id=>{ const el=document.getElementById(id); if(el){el.style.filter='';el.style.pointerEvents='';} });
+    if(overlay) overlay.style.display='none';
   }
 }
 
-// ─── click handlers ───
+// ── Click handlers ──
 function entryClick() { mbr ? gotoPage(2,document.querySelectorAll('.pnav-btn')[2]) : showPaywall(); }
-function rbarClick()  { mbr ? gotoPage(2,document.querySelectorAll('.pnav-btn')[2]) : showPaywall(); }
-function svipClick()  { if(!mbr) showPaywall(); }
-function unlockClick(){ mbr ? gotoPage(3,document.querySelectorAll('.pnav-btn')[3]) : showPaywall(); }
+function unlockClick() { mbr ? gotoPage(3,document.querySelectorAll('.pnav-btn')[3]) : showPaywall(); }
 
 function showPaywall() {
   if(document.querySelector('.paywall')) return;
   const el = document.createElement('div');
   el.className = 'paywall';
-  el.innerHTML = `
-    <div class="paywall-ico">👑</div>
-    <div class="paywall-title">开通会员，解锁完整月报</div>
-    <div class="paywall-sub">首月 ¥18 · 随时可取消 · 不自动续费</div>
-    <button class="btn-gold" style="max-width:220px;margin:0 auto;display:block;height:42px" onclick="this.closest('.paywall').remove()">立即开通会员</button>
-    <div class="paywall-dismiss" onclick="this.closest('.paywall').remove()">暂不开通</div>
-  `;
+  el.innerHTML = `<div class="pw-ico">👑</div>
+    <div class="pw-title">开通会员，解锁完整月报</div>
+    <div class="pw-sub">首月 ¥18 · 随时可取消 · 不自动续费</div>
+    <button class="pw-btn" onclick="this.closest('.paywall').remove()">立即开通会员</button>
+    <div class="pw-dismiss" onclick="this.closest('.paywall').remove()">暂不开通</div>`;
   document.body.appendChild(el);
   setTimeout(()=>{ if(el.parentElement) el.remove(); }, 5000);
 }
 
-// ─── radar chart (SVG) ───
-function drawRadar(id, W, H, showLabels) {
+// ── Petal Chart (花瓣型雷达) ──
+function drawPetalChart(id, W, H) {
   const svg = document.getElementById(id);
-  if(!svg) return;
-  svg.innerHTML = '';
-  const ns = 'http://www.w3.org/2000/svg';
-  const cx = W/2, cy = H/2;
-  const maxR = Math.min(W,H)/2 - (showLabels ? 26 : 22);
-  const labels = ['财务','情感','事业','健康','心理','人际','学业'];
-  const scores = [85,72,80,88,75,82,68];
-  const dotColors = ['#c9a4ff','#f093fb','#4ecdc4','#a8e063','#f5c842','#5eb3f0','#ff9a9e'];
-  const n = labels.length;
-  const a0 = -Math.PI/2;
-  const pt = (i,r) => ({ x: cx+r*Math.cos(a0+i*2*Math.PI/n), y: cy+r*Math.sin(a0+i*2*Math.PI/n) });
+  if(!svg) return; svg.innerHTML='';
+  const cx=W/2, cy=H/2, maxLen=58;
+  const data = [
+    {label:'财务',value:68,color:'#f59e0b'},
+    {label:'事业',value:78,color:'#8b5cf6'},
+    {label:'人际',value:77,color:'#34d399'},
+    {label:'学业',value:98,color:'#60a5fa'},
+    {label:'心理',value:66,color:'#c084fc'},
+    {label:'健康',value:52,color:'#2dd4bf'},
+    {label:'情感',value:88,color:'#f472b6'},
+  ];
+  const n = data.length;
 
-  const mk = (tag,attrs) => { const el=document.createElementNS(ns,tag); Object.entries(attrs).forEach(([k,v])=>el.setAttribute(k,v)); return el; };
+  // Draw petals
+  data.forEach((d,i) => {
+    const angle = (i/n)*2*Math.PI - Math.PI/2;
+    const len = (d.value/100)*maxLen;
+    const hw = len * 0.32;
+    const cos = Math.cos(angle), sin = Math.sin(angle);
+    const pcos = Math.cos(angle+Math.PI/2), psin = Math.sin(angle+Math.PI/2);
+    const tipX = cx+len*cos, tipY = cy+len*sin;
+    const q1x = cx+(len*.6)*cos+hw*pcos, q1y = cy+(len*.6)*sin+hw*psin;
+    const q2x = cx+(len*.6)*cos-hw*pcos, q2y = cy+(len*.6)*sin-hw*psin;
+    const pathD = `M${cx} ${cy} Q${q1x} ${q1y} ${tipX} ${tipY} Q${q2x} ${q2y} ${cx} ${cy}Z`;
+    const path = document.createElementNS(SVG_NS,'path');
+    path.setAttribute('d',pathD);
+    path.setAttribute('fill',d.color);
+    path.setAttribute('fill-opacity','0.52');
+    path.setAttribute('stroke',d.color);
+    path.setAttribute('stroke-width','1');
+    path.setAttribute('stroke-opacity','0.7');
+    svg.appendChild(path);
+    // Label
+    const ld=len+20;
+    const lx=cx+ld*cos, ly=cy+ld*sin;
+    const scoreT=document.createElementNS(SVG_NS,'text');
+    scoreT.setAttribute('x',lx); scoreT.setAttribute('y',ly-5);
+    scoreT.setAttribute('text-anchor','middle'); scoreT.setAttribute('font-size','11');
+    scoreT.setAttribute('font-weight','700'); scoreT.setAttribute('fill',d.color);
+    scoreT.textContent=d.value; svg.appendChild(scoreT);
+    const labelT=document.createElementNS(SVG_NS,'text');
+    labelT.setAttribute('x',lx); labelT.setAttribute('y',ly+7);
+    labelT.setAttribute('text-anchor','middle'); labelT.setAttribute('font-size','10');
+    labelT.setAttribute('fill','#8b80a8');
+    labelT.textContent=d.label; svg.appendChild(labelT);
+    // Dot at tip
+    const dot=document.createElementNS(SVG_NS,'circle');
+    dot.setAttribute('cx',tipX); dot.setAttribute('cy',tipY);
+    dot.setAttribute('r','3'); dot.setAttribute('fill',d.color);
+    svg.appendChild(dot);
+  });
 
-  // grid rings
-  [.2,.4,.6,.8,1].forEach(r => {
-    const pts = Array.from({length:n},(_,i)=>pt(i,maxR*r));
-    svg.appendChild(mk('polygon',{ points:pts.map(p=>`${p.x},${p.y}`).join(' '), fill:'none', stroke:'rgba(255,255,255,.07)', 'stroke-width':'1' }));
-  });
-  // axes
-  for(let i=0;i<n;i++) {
-    const p=pt(i,maxR);
-    svg.appendChild(mk('line',{x1:cx,y1:cy,x2:p.x,y2:p.y,stroke:'rgba(255,255,255,.08)','stroke-width':'1'}));
-  }
-  // fill
-  const dpts = scores.map((s,i)=>pt(i,maxR*s/100));
-  svg.appendChild(mk('polygon',{ points:dpts.map(p=>`${p.x},${p.y}`).join(' '), fill:'rgba(155,111,211,.22)', stroke:'#9b6fd3', 'stroke-width':'2' }));
-  // dots
-  dpts.forEach((p,i) => {
-    svg.appendChild(mk('circle',{cx:p.x,cy:p.y,r:'4',fill:dotColors[i],stroke:'rgba(12,5,25,.8)','stroke-width':'2'}));
-  });
-  // labels
-  if(showLabels) {
-    labels.forEach((lbl,i) => {
-      const p=pt(i,maxR+18);
-      const t=mk('text',{x:p.x,y:p.y+4,'text-anchor':'middle',fill:'rgba(255,255,255,.55)','font-size':'10','font-family':"'PingFang SC',sans-serif"});
-      t.textContent=lbl;
-      svg.appendChild(t);
-    });
-  }
+  // Center dot
+  const cDot=document.createElementNS(SVG_NS,'circle');
+  cDot.setAttribute('cx',cx); cDot.setAttribute('cy',cy);
+  cDot.setAttribute('r','4'); cDot.setAttribute('fill','#fff');
+  cDot.setAttribute('stroke','#e8e0ff'); cDot.setAttribute('stroke-width','2');
+  svg.appendChild(cDot);
 }
 
-// ─── init ───
-window.addEventListener('load', () => {
-  drawRadar('radar1',200,200,false);
-  drawRadar('radar2',280,220,true);
+// ── Polygon Radar (解锁页预览) ──
+function drawPolygonRadar(id, W, H) {
+  const svg = document.getElementById(id);
+  if(!svg) return; svg.innerHTML='';
+  const cx=W/2, cy=H/2, maxR=Math.min(W,H)/2-28;
+  const labels=['事业','人际','学业','心理','健康','财运','感情'];
+  const scores=[78,77,98,66,52,68,88];
+  const colors=['#8b5cf6','#34d399','#60a5fa','#c084fc','#2dd4bf','#f59e0b','#f472b6'];
+  const n=labels.length;
+  const a0=-Math.PI/2;
+  const pt=(i,r)=>({x:cx+r*Math.cos(a0+i*2*Math.PI/n),y:cy+r*Math.sin(a0+i*2*Math.PI/n)});
+  const mk=(tag,attrs)=>{const el=document.createElementNS(SVG_NS,tag);Object.entries(attrs).forEach(([k,v])=>el.setAttribute(k,v));return el;};
+  [.25,.5,.75,1].forEach(r=>{
+    const pts=Array.from({length:n},(_,i)=>pt(i,maxR*r));
+    svg.appendChild(mk('polygon',{points:pts.map(p=>`${p.x},${p.y}`).join(' '),fill:'none',stroke:'rgba(139,92,246,.12)','stroke-width':'1'}));
+  });
+  for(let i=0;i<n;i++){const p=pt(i,maxR);svg.appendChild(mk('line',{x1:cx,y1:cy,x2:p.x,y2:p.y,stroke:'rgba(139,92,246,.1)','stroke-width':'1'}));}
+  const dpts=scores.map((s,i)=>pt(i,maxR*s/100));
+  svg.appendChild(mk('polygon',{points:dpts.map(p=>`${p.x},${p.y}`).join(' '),fill:'rgba(139,92,246,.15)',stroke:'#a78bfa','stroke-width':'2'}));
+  dpts.forEach((p,i)=>{svg.appendChild(mk('circle',{cx:p.x,cy:p.y,r:'3.5',fill:colors[i]}));});
+  labels.forEach((lbl,i)=>{
+    const p=pt(i,maxR+17);
+    const t=mk('text',{x:p.x,y:p.y+4,'text-anchor':'middle',fill:'#8b80a8','font-size':'10','font-family':"'PingFang SC',sans-serif"});
+    t.textContent=lbl; svg.appendChild(t);
+  });
+}
+
+// ── Init ──
+window.addEventListener('load',()=>{
+  drawPetalChart('petalChart',180,180);
+  drawPolygonRadar('radarUnlock',200,180);
 });
 </script>
 
